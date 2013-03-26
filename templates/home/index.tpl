@@ -11,7 +11,7 @@ Main homepage
 [<if !isset($SM_USER)>]
    <div class="login_box">
       <p class="center">Type your Schedule Miner username/password to login.</p>
-      <p class="center">This website is not associated with Mines.</p>
+      <p class="center">Maintained by CSM ACMx</p>
       <form id="login_form" action="[<$SM_ROOT>]/users/login/" method="post">
          <table>
             <tr>
@@ -27,9 +27,6 @@ Main homepage
             </tr>
          </table>
       </form>
-      <p class="error center">
-         Note: Accounts were reset on November 01, 2012.
-      </p>
       <p class="center"><a href="[<$SM_ROOT>]/users/create">Create an account</a></p>
    </div>
 [</if>]
