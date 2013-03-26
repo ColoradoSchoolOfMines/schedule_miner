@@ -52,7 +52,7 @@ class Search
 
       // set the maximum number of results to return
       $max_results = smconfig_get("max_results", 1000);
-      $this->sc->setLimits(0, $max_results);
+      $this->sc->setLimits(0, $max_results, $max_results);
 
       // set the catalog to search
       $this->index = smconfig_get("index");
