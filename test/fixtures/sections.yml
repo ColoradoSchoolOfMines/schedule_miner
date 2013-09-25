@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  course_id: 
+  teacher_id: 
+  start_time: 2013-09-24 19:32:07
+  end_time: 2013-09-24 19:32:07
+  days_of_week: MyString
+  building_code: MyString
+  room_number: MyString
+  crn: 
+  available_slots: 
+  code: MyString
+
+two:
+  course_id: 
+  teacher_id: 
+  start_time: 2013-09-24 19:32:07
+  end_time: 2013-09-24 19:32:07
+  days_of_week: MyString
+  building_code: MyString
+  room_number: MyString
+  crn: 
+  available_slots: 
+  code: MyString
