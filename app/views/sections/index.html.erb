@@ -1,0 +1,41 @@
+<h1>Listing sections</h1>
+
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Teacher</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Days of week</th>
+    <th>Building code</th>
+    <th>Room number</th>
+    <th>Crn</th>
+    <th>Available slots</th>
+    <th>Code</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sections.each do |section| %>
+  <tr>
+    <td><%= section.course_id %></td>
+    <td><%= section.teacher_id %></td>
+    <td><%= section.start_time %></td>
+    <td><%= section.end_time %></td>
+    <td><%= section.days_of_week %></td>
+    <td><%= section.building_code %></td>
+    <td><%= section.room_number %></td>
+    <td><%= section.crn %></td>
+    <td><%= section.available_slots %></td>
+    <td><%= section.code %></td>
+    <td><%= link_to 'Show', section %></td>
+    <td><%= link_to 'Edit', edit_section_path(section) %></td>
+    <td><%= link_to 'Destroy', section, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Section', new_section_path %>

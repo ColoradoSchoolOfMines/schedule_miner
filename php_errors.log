@@ -1,0 +1,2 @@
+[10-Apr-2013 06:23:57 UTC] PHP Warning:  require_once(adodb/adodb.inc.php): failed to open stream: No such file or directory in C:\Users\Tyler\Dropbox\COLLEGE\College\acmX\schedule_miner\core.php on line 14
+[10-Apr-2013 06:23:57 UTC] PHP Fatal error:  require_once(): Failed opening required 'adodb/adodb.inc.php' (include_path='.;c:\php\includes;c:\adodb5;C:\php\Smarty-3.1.13\libs') in C:\Users\Tyler\Dropbox\COLLEGE\College\acmX\schedule_miner\core.php on line 14

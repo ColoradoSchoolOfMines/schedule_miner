@@ -1,4 +1,14 @@
 ScheduleMiner::Application.routes.draw do
+  resources :sections
+
+  resources :departments
+
+  resources :teachers
+
+  resources :buildings
+
+  resources :courses
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
