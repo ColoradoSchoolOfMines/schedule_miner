@@ -1,14 +1,64 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>ScheduleMiner</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+  	<meta charset="utf-8" />
 
-<%= yield %>
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
 
-</body>
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <nav class="top-bar">
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to "Home", courses_path %></h1>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="right">
+          <li class="divider"></li>
+          <li><%= link_to "Sections", sections_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Teachers", teachers_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Buildings", buildings_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Departments", departments_path %></li>
+          <li class="divider"></li>
+          <li><%= link_to "Classes", courses_path %></li>
+        </ul>
+      </section>
+    </nav>
+    <div class="row">
+      <div class="large-8 columns"><%= yield %></div>
+      <div class="large-4 columns">
+        <h2>About Us</h2>
+        sadfljas;dfljas;ldfja;lsdjf
+        asdflkjasd;lfjas;ldkjf
+        asdflkjas;ldfkjas
+        dfljasdf
+        asdlfjasdf
+
+        ddflj
+      </div>
+    </div>
+    
+
+    
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

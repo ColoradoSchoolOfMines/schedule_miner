@@ -30,6 +30,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.4)
+    chunky_png (1.2.8)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -37,8 +38,13 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    compass (0.12.2)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
     erubis (2.7.0)
     execjs (2.0.1)
+    fssm (0.2.10)
     hike (1.2.3)
     i18n (0.6.5)
     journey (1.0.4)
@@ -98,6 +104,8 @@ GEM
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    zurb-foundation (4.3.2)
+      sass (>= 3.2.0)
 
 PLATFORMS
   ruby
@@ -105,9 +113,11 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  compass
   jquery-rails
   json
   rails (= 3.2.1)
   sass-rails (~> 3.2.3)
   sqlite3
   uglifier (>= 1.0.3)
+  zurb-foundation
