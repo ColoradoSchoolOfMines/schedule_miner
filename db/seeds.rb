@@ -5,6 +5,12 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
+Teacher.delete_all
+Course.delete_all
+Section.delete_all
+Building.delete_all
+Department.delete_all
+
 Teacher.create(name: 'Yong Bakos')
 Teacher.create(name: 'Keith Hellman')
 Teacher.create(name: 'Cyndi Rader')
