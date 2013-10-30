@@ -266,7 +266,7 @@ class Import extends Module
 
       // get the tables and rows of the first (and hopefully only) table
       $tables = $dom->getElementsByTagName('table');
-      $rows = $tables->item(0)->getElementsByTagName('tr');
+      $rows = $tables->item(6)->getElementsByTagName('tr');
 
       // current record
       // incremented before every new record, so start at -1
