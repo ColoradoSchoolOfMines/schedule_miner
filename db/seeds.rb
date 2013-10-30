@@ -54,3 +54,10 @@ Section.create(start_time: '1:00PM',
                crn: 40045,
                available_slots: 30,
                code: 'CSCI234')
+
+Department.create(code: 'CSCI', name: 'Computer Science')
+Department.create(code: 'MATH', name: 'Mathematics')
+Department.create(code: 'PHGN', name: 'Physics')
+Building.create(code: 'MZ', name: 'Marquez Building')
+Building.create(code: 'BB', name: 'Brown Building')
+Building.create(code: 'CH', name: 'Chauvenet Building')
