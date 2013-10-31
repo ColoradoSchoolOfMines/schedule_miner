@@ -16,6 +16,7 @@ Teacher.create(name: 'Keith Hellman')
 Teacher.create(name: 'Cyndi Rader')
 Teacher.create(name: 'William Bahn')
 Teacher.create(name: 'Tracy Camp')
+Teacher.create(name: 'Steven Pankavich')
 
 Course.create(name: 'Advanced Software Engineering',
               department_code: 'CSCI',
