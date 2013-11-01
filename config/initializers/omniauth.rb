@@ -3,7 +3,7 @@ require 'openid'
 require 'openid/store/filesystem'
 require 'gapps_openid'
 
-
+OmniAuth.config.logger = Rails.logger
 # OpenID.fetcher.ca_file = "/absolute/path/to/ssl_cacert.pem"
 
 # Rails.application.config.middleware.use OmniAuth::Builder do

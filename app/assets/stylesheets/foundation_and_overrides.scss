@@ -1255,8 +1255,9 @@ $column-gutter: em-calc(60);
 
 // Background color for the top bar
 
-$topbar-bg-color: #111;
+$topbar-bg-color: #287f71;
 // $topbar-bg: $topbar-bg-color;
+$topbar-hover-color: #4f7f78;
 
 // Height and margin
 
@@ -1276,7 +1277,7 @@ $topbar-bg-color: #111;
 
 // $topbar-dropdown-bg: #222;
 // $topbar-dropdown-link-color: #fff;
-// // $topbar-dropdown-link-bg: lighten($topbar-bg-color, 5%);
+// $topbar-dropdown-link-bg: lighten($topbar-bg-color, 5%);
 // $topbar-dropdown-toggle-size: 5px;
 // $topbar-dropdown-toggle-color: #fff;
 // $topbar-dropdown-toggle-alpha: 0.5;
@@ -1289,7 +1290,7 @@ $topbar-bg-color: #111;
 // $topbar-link-weight: bold;
 // $topbar-link-font-size: em-calc(13);
 // $topbar-link-hover-lightness: -30%; // Darken by 30%
-// $topbar-link-bg-hover: darken($topbar-bg-color, 3%);
+$topbar-link-bg-hover: darken($topbar-hover-color, 10%);
 // $topbar-link-bg-active: darken($topbar-bg-color, 3%);
 
 // $topbar-dropdown-label-color: #555;

@@ -38,16 +38,17 @@
           <li><%= link_to "Departments", departments_path %></li>
           <li class="divider"></li>
           <li><%= link_to "Classes", courses_path %></li>
+          <li class="divider"></li>
         </ul>
         <ul class="right">
           <li class="divider"></li>
-          <li>
-            <% if current_user %>
-              <%= link_to "#{current_user.first_name}", '#' %>
-            <% else %>
-              <%= link_to "Login", "/auth/google_oauth2" %>
-            <% end %>
-          </li>
+          <% if current_user %>
+            <li><%= link_to "#{current_user.first_name}", '#' %></li>
+            <li class="divider"></li>
+            <li><%= link_to 'Sign Out', signout_path %></li>
+          <% else %>
+            <li><%= link_to "Sign In", "/auth/google_oauth2" %></li>
+          <% end %>
           <li class="divider"></li>
         </ul>
       </section>

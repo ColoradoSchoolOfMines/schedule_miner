@@ -63,6 +63,8 @@ ScheduleMiner::Application.routes.draw do
   # root :to => 'welcome#index'
   root to: 'static#index', as: 'static'
   match 'auth/:provider/callback', to: 'sessions#create'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
 
   # See how all your routes lay out with "rake routes"
 
