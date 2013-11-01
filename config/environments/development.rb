@@ -34,4 +34,9 @@ ScheduleMiner::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # This is so that we don't check for a CA root certificate when developing locally
+  # DO NOT DO THIS IN PRODUCTION!
+  # fix found here> http://stackoverflow.com/questions/9095755/facebook-redirect-url-in-ruby-on-rails-open-ssl-error
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 end

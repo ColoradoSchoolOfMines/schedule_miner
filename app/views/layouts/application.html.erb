@@ -41,11 +41,24 @@
         </ul>
         <ul class="right">
           <li class="divider"></li>
-          <li><%= link_to "Login", "/auth/google_oauth2" %></li>
+          <li>
+            <% if current_user %>
+              <%= link_to "#{current_user.first_name}", '#' %>
+            <% else %>
+              <%= link_to "Login", "/auth/google_oauth2" %>
+            <% end %>
+          </li>
           <li class="divider"></li>
         </ul>
       </section>
     </nav>
+    <div class="row">
+      <div class='large-12 columns'>
+        <% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, id: "flash_#{name}" %>
+        <% end %>
+      </div>
+    </div>
     <div class="row">
       <div class="large-12 columns"><%= yield %></div>
     </div>
