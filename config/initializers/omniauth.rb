@@ -13,8 +13,12 @@ require 'gapps_openid'
 #                       :store => OpenID::Store::Filesystem.new('/tmp')
 # end
 Rails.application.config.middleware.use Rack::Session::Cookie
-Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :google_apps, 
-           domain: 'mymail.mines.edu'
+# Rails.application.config.middleware.use OmniAuth::Builder do
+#   provider :google_apps, 
+#            domain: 'mymail.mines.edu'
 
+# end
+
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :google_oauth2, "577255551189.apps.googleusercontent.com", "9Y6EjYFulWutGnNjDXJ3CYkt"
 end
