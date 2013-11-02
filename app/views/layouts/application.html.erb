@@ -53,17 +53,21 @@
         </ul>
       </section>
     </nav>
-    <div class="row">
-      <div class='large-12 columns'>
-        <% flash.each do |name, msg| %>
-          <%= content_tag :div, msg, id: "flash_#{name}" %>
-        <% end %>
+    <section role="main">
+      <div class="row">
+        <div class='large-3 columns large-centered'>
+          <% flash.each do |name, msg| %>
+            <div data-alert class="alert-box success">
+              <%= content_tag :div, msg, id: "flash_#{name}" %>
+              <a href="#" class="close">&times;</a>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="large-12 columns"><%= yield %></div>
-    </div>
-    
+      <div class="row">
+        <div class="large-12 columns"><%= yield %></div>
+      </div>
+    </section>
     <%= javascript_include_tag "application" %>
   </body>
 </html>

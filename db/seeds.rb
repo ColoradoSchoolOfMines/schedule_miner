@@ -11,12 +11,27 @@ Section.delete_all
 Building.delete_all
 Department.delete_all
 
-Teacher.create(name: 'Yong Bakos')
-Teacher.create(name: 'Keith Hellman')
-Teacher.create(name: 'Cyndi Rader')
-Teacher.create(name: 'William Bahn')
+Teacher.create(name: 'Yong J. Bakos')
+Teacher.create(name: 'Keith E. Hellman')
+Teacher.create(name: 'Cynthia A. Rader')
+Teacher.create(name: 'William Louis Bahn')
 Teacher.create(name: 'Tracy Camp')
 Teacher.create(name: 'Steven Pankavich')
+Teacher.create(name: 'Larry Edward Johnson')
+Teacher.create(name: 'Randall Wayne Bower')
+Teacher.create(name: 'James Kaleb Slyby')
+Teacher.create(name: 'Oscar Thyago Jose Duarte Dantas Lisboa Mota')
+Teacher.create(name: 'Ira David Hale')
+Teacher.create(name: 'Christopher Robert Painter-Wakefield')
+Teacher.create(name: 'Randy L. Haupt')
+Teacher.create(name: 'Qi Han')
+Teacher.create(name: 'William A. Hoff')
+Teacher.create(name: 'Josh Ryan Thomas')
+Teacher.create(name: 'Andrzej Szymczak')
+Teacher.create(name: 'Dejun Yang')
+Teacher.create(name: 'Hua Wang')
+Teacher.create(name: 'Mahadevan Ganesh')
+Teacher.create(name: 'Dinesh Prakash Mehta')
 
 Course.create(name: 'Advanced Software Engineering',
               department_code: 'CSCI',
@@ -36,6 +51,7 @@ Course.create(name: 'Introduction to Electromagnetics',
 Course.create(name: 'Chemistry I',
               department_code: 'CHGN',
               course_number: '100')
+
 
 Section.create(start_time: '8:00AM',
                end_time: '8:50AM',
