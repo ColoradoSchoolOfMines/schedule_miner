@@ -10,6 +10,12 @@ class StaticController < ApplicationController
     sm.build_classes
     @yaml = sm.classes.to_yaml
 
+    classes = sm.classes
+
+    classes.each do |class_name,section_array|
+      
+    end
+
     respond_to do |format|
       format.html #{ redirect_to static_url, notice: 'Classes generated'}
     end
