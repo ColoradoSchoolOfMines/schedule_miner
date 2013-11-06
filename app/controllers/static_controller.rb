@@ -13,36 +13,42 @@ class StaticController < ApplicationController
     Course.delete_all
     Section.delete_all
 
+    @unknown_buildings = {}
+    @unknown_departments = {}
+
     ActiveRecord::Base.transaction do 
       sm.classes.each do |class_name,sections|
+        if !Department.find_by_code(sections[0]['Department Code'])
+          @unknown_departments[sections[0]['Department Code']] = true
+          next
+        end
+
         course = Course.create(
           name: class_name,
           department_code: sections[0]['Department Code'],
           course_number: sections[0]['Course Number'],
         )
         sections.each do |section_info|
-          teachers = [*section_info['Instructors']].map do |teacher_name|
+          teachers = section_info['Instructors'].map do |teacher_name|
             teacher_name.sub!(/ \(P\)/, '')
             Teacher.find_or_create_by_name(teacher_name)
           end
 
-          time_info = /(\d{1,2}:\d{2}) ([ap]m) - (\d{1,2}:\d{2}) ([ap]m)/.match(section_info['Time'])
-          location_info = section_info['Where'].split(/ /)
-          if location_info.size >= 2
-            building_code = location_info[0..-2].join(' ')
-            room = location_info[-1]
-          else
-            building_code = location_info[0]
-            room = ''
+          building = Building.find_by_name(section_info['Building'])
+
+          if !building
+            @unknown_buildings[section_info['Building']] = true
+            next
           end
+
           Section.create(
             course: course,
             teachers: teachers,
-            start_time: time_info ? (time_info[1] + time_info[2].upcase) : 'TBA',
-            end_time: time_info ? (time_info[3] + time_info[4].upcase) : 'TBA',
+            start_time: section_info['Start Time'],
+            end_time: section_info['End Time'],
             days_of_week: section_info['Days'],
-            building_code: building_code,
-            room_number: room,
+            building_code: building.code,
+            room_number: section_info['Room'],
             crn: section_info['CRN'],
           )
         end
