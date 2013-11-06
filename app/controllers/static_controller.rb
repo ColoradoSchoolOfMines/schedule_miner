@@ -12,8 +12,6 @@ class StaticController < ApplicationController
     Teacher.delete_all
     Course.delete_all
     Section.delete_all
-    Building.delete_all
-    Department.delete_all
 
     ActiveRecord::Base.transaction do 
       sm.classes.each do |class_name,sections|

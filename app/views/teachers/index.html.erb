@@ -1,22 +1,16 @@
-<h1>Listing teachers</h1>
+<h1>Teachers</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<% teachers_chunked = @teachers.group_by {|teacher| teacher.name[0]} %>
 
-<% @teachers.each do |teacher| %>
-  <tr>
-    <td><%= teacher.name %></td>
-    <td><%= link_to 'Show', teacher %></td>
-    <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
-    <td><%= link_to 'Destroy', teacher, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% teachers_chunked.keys.each do |letter| %>
+  <h2><%= letter.upcase %></h2>
+
+  <ul class="large-block-grid-4">
+    <% teachers_chunked[letter].each do |teacher| %>
+      <li><%= link_to teacher.name, teacher_path(teacher) %> <span class="label secondary radius"><%= teacher.sections.count %></span></li>
+    <% end %>
+  </ul>
 <% end %>
-</table>
 
 <br />
 

@@ -1,9 +1,34 @@
+<h1><%= @teacher.name %></h1>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @teacher.name %>
-</p>
+<h2>Sections</h2>
+
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Teacher</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Days of week</th>
+    <th>Room</th>
+    <th>CRN</th>
+  </tr>
+
+<% @teacher.sections.each do |section| %>
+  <tr>
+    <td><%= section.course.name %></td>
+    <td><% section.teachers.each do |teacher|%> 
+        <%= link_to Teacher.find(teacher.id).name, Teacher.find(teacher.id) %>
+        <% end -%>
+    </td>
+    <td><%= section.start_time %></td>
+    <td><%= section.end_time %></td>
+    <td><%= section.days_of_week %></td>
+    <td><%= section.building_code %> <%= section.room_number %></td>
+    <td><%= section.crn %></td>
+  </tr>
+<% end %>
+</table>
 
 
 <%= link_to 'Edit', edit_teacher_path(@teacher) %> |
