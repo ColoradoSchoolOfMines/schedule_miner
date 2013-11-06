@@ -28,6 +28,9 @@ gem 'omniauth-openid'
 gem 'ruby-openid-apps-discovery'
 gem 'omniauth-google-oauth2'
 
+gem 'nokogiri'
+gem 'nprogress-rails'
+# gem 'yaml'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
