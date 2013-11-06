@@ -20,7 +20,7 @@
 <% @sections.each do |section| %>
   <tr>
     <td><%= section.course_id %></td>
-    <td><%= section.teacher_id %></td>
+    <td><%= link_to Teacher.find(section.teacher_id).name, Teacher.find(section.teacher_id) %></td>
     <td><%= section.start_time %></td>
     <td><%= section.end_time %></td>
     <td><%= section.days_of_week %></td>

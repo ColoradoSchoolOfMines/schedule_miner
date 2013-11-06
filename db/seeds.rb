@@ -11,12 +11,12 @@ Section.delete_all
 Building.delete_all
 Department.delete_all
 
-Teacher.create(name: 'Yong Bakos')
-Teacher.create(name: 'Keith Hellman')
-Teacher.create(name: 'Cyndi Rader')
-Teacher.create(name: 'William Bahn')
-Teacher.create(name: 'Tracy Camp')
-Teacher.create(name: 'Steven Pankavich')
+yong = Teacher.create(name: 'Yong Bakos')
+keith = Teacher.create(name: 'Keith Hellman')
+cyndi = Teacher.create(name: 'Cyndi Rader')
+william = Teacher.create(name: 'William Bahn')
+tracy = Teacher.create(name: 'Tracy Camp')
+steven = Teacher.create(name: 'Steven Pankavich')
 
 Course.create(name: 'Advanced Software Engineering',
               department_code: 'CSCI',
@@ -44,7 +44,9 @@ Section.create(start_time: '8:00AM',
                room_number: '336',
                crn: 80432,
                available_slots: 40,
-               code: 'MATH332')
+               code: 'MATH332',
+               # teacher_id: Teacher.find_by_name("Yong Bakos").id)
+               teacher_id: yong.id)
 Section.create(start_time: '10:00AM',
                end_time: '11:30AM',
                days_of_week: 'TTh',
@@ -52,7 +54,9 @@ Section.create(start_time: '10:00AM',
                room_number: '280',
                crn: 80444,
                available_slots: 40,
-               code: 'MATH223')
+               code: 'MATH223',
+               # teacher_id: Teacher.find_by_name('Keith Hellman').id)
+               teacher_id: keith.id)
 Section.create(start_time: '1:00PM',
                end_time: '1:50PM',
                days_of_week: 'MWF',
@@ -60,7 +64,9 @@ Section.create(start_time: '1:00PM',
                room_number: '102',
                crn: 40045,
                available_slots: 30,
-               code: 'CSCI234')
+               code: 'CSCI234',
+               # teacher_id: Teacher.find_by_name('Steven Pankavich').id)
+               teacher_id: tracy.id)
 
 Department.create(code: 'CSCI', name: 'Computer Science')
 Department.create(code: 'MATH', name: 'Mathematics')

@@ -1,5 +1,7 @@
 ScheduleMiner::Application.routes.draw do
   get "static/index"
+  get 'static/update'
+  match 'update_schedules' => 'static#update'
 
   resources :sections
 
