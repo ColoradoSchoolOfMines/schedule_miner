@@ -90,7 +90,7 @@ module StaticHelper
 
         time_info = /(?<start_hour>\d{1,2}:\d{2}) (?<start_minute>[ap]m) - (?<end_hour>\d{1,2}:\d{2}) (?<end_minute>[ap]m)/.match(section_stats['Time'])
         location_info = section_stats['Where'].strip.split(/ /)
-        if section_stats['Where'] =~ /^(No Room|Off Campus)$/
+        if section_stats['Where'] =~ /^(No Room|Off Campus|Edgar Mine|Student Center)$/
           building = section_stats['Where']
           room = ''
         elsif location_info.size >= 2
