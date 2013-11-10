@@ -1,15 +1,8 @@
+<% content_for :title do %><%= @building.name %> (<%= @building.code %>)<% end %>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Code:</b>
-  <%= @building.code %>
-</p>
-
-<p>
-  <b>Name:</b>
-  <%= @building.name %>
-</p>
-
+<%= render partial: 'shared/sections', locals: {sections: @building.sections} %>
 
 <%= link_to 'Edit', edit_building_path(@building) %> |
 <%= link_to 'Back', buildings_path %>

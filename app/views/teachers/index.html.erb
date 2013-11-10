@@ -1,4 +1,4 @@
-<h1>Teachers</h1>
+<% content_for :title do %>Teachers<% end %>
 
 <% teachers_chunked = @teachers.group_by {|teacher| teacher.name[0]} %>
 

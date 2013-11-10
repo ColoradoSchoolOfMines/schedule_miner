@@ -50,6 +50,7 @@ class StaticController < ApplicationController
             building_code: building.code,
             room_number: section_info['Room'],
             crn: section_info['CRN'],
+            code: section_info['Section'],
           )
         end
       end

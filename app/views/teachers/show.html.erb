@@ -1,8 +1,7 @@
-<h1><%= @teacher.name %></h1>
+<% content_for :title do %><%= @teacher.name %><% end %>
 <p id="notice"><%= notice %></p>
 
 <%= render partial: 'shared/sections', locals: {sections: @teacher.sections} %>
-
 
 <%= link_to 'Edit', edit_teacher_path(@teacher) %> |
 <%= link_to 'Back', teachers_path %>

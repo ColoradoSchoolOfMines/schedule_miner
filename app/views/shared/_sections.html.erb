@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Course</th>
+    <th>Section</th>
     <th>Teacher</th>
     <th>Start time</th>
     <th>End time</th>
@@ -13,7 +14,8 @@
 
 <% sections.each do |section| %>
   <tr>
-    <td><%= section.course.name %></td>
+    <td><%= link_to section.course.name, section.course %></td>
+    <td><%= section.code %></td>
     <td><% section.teachers.each do |teacher|%> 
         <%= link_to Teacher.find(teacher.id).name, Teacher.find(teacher.id) %>
         <% end -%>
@@ -21,7 +23,7 @@
     <td><%= section.start_time %></td>
     <td><%= section.end_time %></td>
     <td><%= section.days_of_week %></td>
-    <td><%= section.building_code %> <%= section.room_number %></td>
+    <td><%= link_to section.building_code, section.building %>&nbsp;<%= section.room_number %></td>
     <td><%= section.crn %></td>
   </tr>
 <% end %>

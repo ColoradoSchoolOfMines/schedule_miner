@@ -2,7 +2,7 @@ class SectionsController < ApplicationController
   # GET /sections
   # GET /sections.json
   def index
-    @sections = Section.all
+    @sections = Section.find_by_course_id(params[:course_id])
 
     respond_to do |format|
       format.html # index.html.erb

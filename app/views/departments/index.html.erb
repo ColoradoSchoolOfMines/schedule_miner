@@ -1,4 +1,4 @@
-<h1>Listing departments</h1>
+<% content_for :title do %>Departments<% end %>
 
 <table>
   <tr>
@@ -12,8 +12,7 @@
 <% @departments.each do |department| %>
   <tr>
     <td><%= department.code %></td>
-    <td><%= department.name %></td>
-    <td><%= link_to 'Show', department %></td>
+    <td><%= link_to department.name, department %></td>
     <td><%= link_to 'Edit', edit_department_path(department) %></td>
     <td><%= link_to 'Destroy', department, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

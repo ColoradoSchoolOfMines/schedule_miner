@@ -14,7 +14,7 @@
   	<!-- Set the viewport width to device width for mobile -->
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+  	<title><%= content_for?(:title) ? yield(:title) + ' - ' : '' %>Schedule Miner</title>
 
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
@@ -29,8 +29,6 @@
         </ul>
         <section class="top-bar-section">
           <ul class="left">
-            <li class="divider"></li>
-            <li><%= link_to "Sections", sections_path %></li>
             <li class="divider"></li>
             <li><%= link_to "Teachers", teachers_path %></li>
             <li class="divider"></li>
@@ -63,7 +61,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="large-12 columns expand"><%= yield %></div>
+      <div class="large-12 columns expand">
+        <% if content_for?(:title) %><h1><%= yield(:title) %></h1><% end %>
+        <%= yield %>
+      </div>
     </div>
     <div><%= link_to 'Create Schedules', update_schedules_path, {class: "large button radius expand"}%> </div>
     
