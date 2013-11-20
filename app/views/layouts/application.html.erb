@@ -5,68 +5,109 @@
 <!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
 <!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
-  <head>
-  	<meta charset="utf-8" />
+<head>
+ <meta charset="utf-8" />
 
-  	<!-- Uncomment to make IE8 render like IE7 -->
-  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+ <!-- Uncomment to make IE8 render like IE7 -->
+ <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
 
-  	<!-- Set the viewport width to device width for mobile -->
-  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <!-- Set the viewport width to device width for mobile -->
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  	<title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+ <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-  	<%= stylesheet_link_tag    "application" %>
-  	<%= javascript_include_tag "vendor/custom.modernizr" %>
-    <%= csrf_meta_tags %>
-  </head>
+ <%= stylesheet_link_tag    "application" %>
+ <%= csrf_meta_tags %>
+</head>
 
-  <body>
-    <div class="fixed">
-      <nav class="top-bar">
-        <ul class="title-area">
-          <li class="name"></li>
-        </ul>
-        <section class="top-bar-section">
-          <ul class="left">
+<body>
+
+  <nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Schedule Miner</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
             <li class="divider"></li>
-            <li><%= link_to "Sections", sections_path %></li>
+            <li><a href="#">Separated link</a></li>
             <li class="divider"></li>
-            <li><%= link_to "Teachers", teachers_path %></li>
-            <li class="divider"></li>
-            <li><%= link_to "Buildings", buildings_path %></li>
-            <li class="divider"></li>
-            <li><%= link_to "Departments", departments_path %></li>
-            <li class="divider"></li>
-            <li><%= link_to "Classes", courses_path %></li>
-            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
           </ul>
-          <ul class="right">
+        </li>
+      </ul>
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
             <li class="divider"></li>
-            <% if current_user %>
-              <li><%= link_to "#{current_user.first_name}", static_url %></li>
-              <li class="divider"></li>
-              <li><%= link_to 'Sign Out', signout_path %></li>
-            <% else %>
-              <li><%= link_to "Sign In", "/auth/google_oauth2" %></li>
-            <% end %>
-            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
           </ul>
-        </section>
-      </nav>
+        </li>
+        <li>
+          <li class="divider"></li>
+          <% if current_user %>
+            <li><%= link_to "#{current_user.first_name}", static_url %></li>
+            <li class="divider"></li>
+            <li><%= link_to 'Sign Out', signout_path %></li>
+          <% else %>
+            <li><%= link_to "Sign In", "/auth/google_oauth2" %></li>
+          <% end %>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+  <div class="container">
+    <div class="row">
+    <div class='col-md-4 col-md-offset-4'>
+      <% flash.each do |name, msg| %>
+      <div class="alert alert-success fade in">
+        <!-- <%= content_tag :div, msg, id: "flash_#{name}" %> -->
+        <%= msg %>
+        <a class="close" data-dismiss="alert" href="#" aria-hidden="true">&times;</a>
+      </div>
+      <% end %>
+    </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12"><%= yield %></div>
     </div>
     <div class="row">
-      <div class='large-12 columns'>
-        <% flash.each do |name, msg| %>
-          <%= content_tag :div, msg, id: "flash_#{name}" %>
-        <% end %>
+      <div class="col-md-12">
+        <div><%= link_to 'Create Schedules', update_schedules_path, {class: "btn btn-success btn-lrg btn-block"}%> </div>
       </div>
     </div>
-    <div class="row">
-      <div class="large-12 columns expand"><%= yield %></div>
-    </div>
-    <div><%= link_to 'Create Schedules', update_schedules_path, {class: "large button radius expand"}%> </div>
-    
-    <%= javascript_include_tag "application" %>
-  </body>
+  </div>
+
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <%= javascript_include_tag "application" %>
+</body>
 </html>

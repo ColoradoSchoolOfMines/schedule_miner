@@ -14,7 +14,7 @@ gem 'json'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
+  gem 'bootstrap-sass', '~>3.0.1.0.rc'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'
   gem 'compass'
@@ -30,6 +30,7 @@ gem 'omniauth-google-oauth2'
 
 gem 'nokogiri'
 gem 'nprogress-rails'
+
 # gem 'yaml'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

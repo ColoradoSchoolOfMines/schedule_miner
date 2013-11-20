@@ -13,3 +13,17 @@
  *= require nprogress-bootstrap
  *= require_tree .
 */
+
+/*@import "bootstrap";*/
+
+// $navbar-default-bg: #287571;
+$navbar-default-bg: #2c343f;
+// $navbar-default-link-color: #41CCB6;
+$navbar-default-link-color: #536B8B;
+$navbar-default-link-hover: #fff;
+$navbar-default-link-active-color: #fff;
+$navbar-default-brand-color: #fff;
+
+$navbar-border-radius: 0;
+
+@import "bootstrap-custom";
