@@ -24,6 +24,24 @@ $navbar-default-link-hover: #fff;
 $navbar-default-link-active-color: #fff;
 $navbar-default-brand-color: #fff;
 
+$grid-gutter-width: 50px;
+
 $navbar-border-radius: 0;
 
 @import "bootstrap-custom";
+
+.flexcontainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.teacher-button {
+  display: inline-block;
+  margin: 5px 1px 5px 1px;
+}
+
+.top-buffer {margin-top: 20px;}
