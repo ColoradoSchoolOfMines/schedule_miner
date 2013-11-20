@@ -11,6 +11,7 @@
   </tr>
 
 <% @courses.each do |course| %>
+<% puts course.inspect %>
   <tr>
     <td><%= course.department_code %>&nbsp;<%= course.course_number %></td>
     <td><%= link_to course.name, course %></td>

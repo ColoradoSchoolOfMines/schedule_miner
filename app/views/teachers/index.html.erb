@@ -1,15 +1,21 @@
 <% content_for :title do %>Teachers<% end %>
 
-<% teachers_chunked = @teachers.group_by {|teacher| teacher.name[0]} %>
+<% teachers_chunked = @teachers.group_by {|teacher| teacher.name.split[-1][0]} %>
 
-<% teachers_chunked.keys.each do |letter| %>
-  <h2><%= letter.upcase %></h2>
+<% teachers_chunked.keys.sort.each do |letter| %>
 
-  <ul class="large-block-grid-4">
-    <% teachers_chunked[letter].each do |teacher| %>
-      <li><%= link_to teacher.name, teacher_path(teacher) %> <span class="label secondary radius"><%= teacher.sections.count %></span></li>
-    <% end %>
-  </ul>
+  <div class="container">
+  <div class="row">
+  <h2 class="col-md-1"><%= letter.upcase %></h2>
+  <!-- <ul class="large-block-grid-4"> -->
+    <flexcontainer>
+      <% teachers_chunked[letter].each do |teacher| %>
+        <span class="badge pull-radius"><%= teacher.sections.count %></span> <%= link_to teacher.name, teacher_path(teacher) %>
+      <% end %>
+    </flexcontainer>
+  <!-- </ul> -->
+  </div>
+  </div>
 <% end %>
 
 <br />

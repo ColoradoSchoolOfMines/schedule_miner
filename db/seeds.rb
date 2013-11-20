@@ -46,7 +46,7 @@ linalg = Course.create(name: 'Linear Algebra',
               department_code: 'MATH', 
               course_number: '332')
 bio = Course.create(name: 'Introduction to Biology',
-              department_code: 'BELS',
+              department_code: 'BIOL',
               course_number: '101')
 mechanics = Course.create(name: 'Introduction to Mechanics',
               department_code: 'PHGN',
