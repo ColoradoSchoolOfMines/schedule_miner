@@ -1,10 +1,10 @@
-<h1>Listing courses</h1>
+<% content_for :title do %>Courses<% end %>
 
 <table>
   <tr>
+    <th>Code</th>
     <th>Name</th>
-    <th>Department code</th>
-    <th>Course number</th>
+    <th>Department</th>
     <th></th>
     <th></th>
     <th></th>
@@ -12,10 +12,9 @@
 
 <% @courses.each do |course| %>
   <tr>
-    <td><%= course.name %></td>
-    <td><%= course.department_code %></td>
-    <td><%= course.course_number %></td>
-    <td><%= link_to 'Show', course %></td>
+    <td><%= course.department_code %>&nbsp;<%= course.course_number %></td>
+    <td><%= link_to course.name, course %></td>
+    <td><%= link_to course.department.name, course.department %>
     <td><%= link_to 'Edit', edit_course_path(course) %></td>
     <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

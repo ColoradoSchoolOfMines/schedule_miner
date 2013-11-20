@@ -3,15 +3,15 @@ ScheduleMiner::Application.routes.draw do
   get 'static/update'
   match 'update_schedules' => 'static#update'
 
-  resources :sections
-
   resources :departments
 
   resources :teachers
 
   resources :buildings
 
-  resources :courses
+  resources :courses do
+    resources :sections
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

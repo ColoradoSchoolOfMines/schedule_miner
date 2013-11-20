@@ -1,20 +1,8 @@
+<% content_for :title do %><%= @course.department_code + ' ' + @course.course_number %><% end %>
+<h2><%= @course.name %></h2>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @course.name %>
-</p>
-
-<p>
-  <b>Department code:</b>
-  <%= @course.department_code %>
-</p>
-
-<p>
-  <b>Course number:</b>
-  <%= @course.course_number %>
-</p>
-
+<%= render partial: 'shared/sections', locals: {sections: @course.sections} %>
 
 <%= link_to 'Edit', edit_course_path(@course) %> |
 <%= link_to 'Back', courses_path %>

@@ -1,7 +1,15 @@
 <div class="row">
+  <% unless @unknown_buildings.empty? %>
+    <div class="alert-box alert">Unknown buildings: <%= @unknown_buildings.keys.sort.join(', ') %></div>
+  <% end %>
+
+  <% unless @unknown_departments.empty? %>
+    <div class="alert-box alert">Unknown departments: <%= @unknown_departments.keys.sort.join(', ') %></div>
+  <% end %>
+
   <h2 class="small-5 large-12 centered columns">Schedule Miner</h2>
+
   <div>
-    <p> Current Classes </p>
-    <p><%= @yaml %></p>
+    <p> Classes updated. </p>
   </div>
 </div>

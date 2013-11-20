@@ -1,0 +1,30 @@
+<h2>Sections</h2>
+
+<table>
+  <tr>
+    <th>Course</th>
+    <th>Section</th>
+    <th>Teacher</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Days of week</th>
+    <th>Room</th>
+    <th>CRN</th>
+  </tr>
+
+<% sections.each do |section| %>
+  <tr>
+    <td><%= link_to section.course.name, section.course %></td>
+    <td><%= section.code %></td>
+    <td><% section.teachers.each do |teacher|%> 
+        <%= link_to Teacher.find(teacher.id).name, Teacher.find(teacher.id) %>
+        <% end -%>
+    </td>
+    <td><%= section.start_time %></td>
+    <td><%= section.end_time %></td>
+    <td><%= section.days_of_week %></td>
+    <td><%= link_to section.building_code, section.building %>&nbsp;<%= section.room_number %></td>
+    <td><%= section.crn %></td>
+  </tr>
+<% end %>
+</table>

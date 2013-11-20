@@ -88,6 +88,24 @@ module StaticHelper
           end
         end
 
+        time_info = /(?<start_hour>\d{1,2}:\d{2}) (?<start_minute>[ap]m) - (?<end_hour>\d{1,2}:\d{2}) (?<end_minute>[ap]m)/.match(section_stats['Time'])
+        location_info = section_stats['Where'].strip.split(/ /)
+        if section_stats['Where'] =~ /^(No Room|Off Campus|Edgar Mine|Student Center)$/
+          building = section_stats['Where']
+          room = ''
+        elsif location_info.size >= 2
+          building = location_info[0..-2].join(' ')
+          room = location_info[-1]
+        else
+          building = location_info[0]
+          room = ''
+        end
+
+        section_stats['Building'] = building
+        section_stats['Room'] = room
+        section_stats['Start Time'] = time_info ? (time_info[:start_hour] + time_info[:start_minute].upcase) : 'TBA'
+        section_stats['End Time'] = time_info ? (time_info[:end_hour] + time_info[:end_minute].upcase) : 'TBA'
+
         @classes[class_name] ||= []
         @classes[class_name] << section_stats
       end
@@ -105,7 +123,7 @@ module StaticHelper
       if column[0].text == "Instructors" && column[1].text.include?(',')
         stats = column[1].text.squeeze(' ').split(', ').collect(&:strip)
       elsif column[0].text == "Instructors"
-        stats = column[1].text.squeeze(' ').strip
+        stats = [column[1].text.squeeze(' ').strip]
       else
         stats = column[1].text.strip
       end

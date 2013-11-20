@@ -1,4 +1,4 @@
-<h1>Listing buildings</h1>
+<% content_for :title do %>Buildings<% end %>
 
 <table>
   <tr>
@@ -12,8 +12,7 @@
 <% @buildings.each do |building| %>
   <tr>
     <td><%= building.code %></td>
-    <td><%= building.name %></td>
-    <td><%= link_to 'Show', building %></td>
+    <td><%= link_to building.name, building %></td>
     <td><%= link_to 'Edit', edit_building_path(building) %></td>
     <td><%= link_to 'Destroy', building, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
