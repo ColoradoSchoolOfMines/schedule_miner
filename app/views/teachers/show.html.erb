@@ -1,4 +1,5 @@
 <% content_for :title do %><%= @teacher.name %><% end %>
+<h1> <%= @teacher.name %> </h1>
 <p id="notice"><%= notice %></p>
 
 <%= render partial: 'shared/sections', locals: {sections: @teacher.sections} %>
