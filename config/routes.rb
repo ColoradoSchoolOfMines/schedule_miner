@@ -1,14 +1,18 @@
 ScheduleMiner::Application.routes.draw do
+  get "schedule/index"
+
   get "static/index"
   get 'static/update'
-  match 'update_schedules' => 'static#update'
+  match 'update_schedules' => 'schedule#new'
 
   resources :departments
+
+  resources :schedules
 
   resources :teachers
 
   resources :buildings
-
+  
   resources :courses do
     resources :sections
   end
