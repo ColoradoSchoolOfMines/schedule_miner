@@ -1,2 +1,7 @@
-<h1>Schedule#index</h1>
-<p>Find me in app/views/schedule/index.html.erb</p>
+<% content_for :title do %><%= @schedule.name %><% end %>
+<h2><%= @schedule.name %></h2>
+<p id="notice"><%= notice %></p>
+
+<%= render partial: 'shared/sections', locals: {sections: @schedule.sections} %>
+
+<%= link_to 'Back', schedules_path %>
