@@ -14,7 +14,7 @@
  <!-- Set the viewport width to device width for mobile -->
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
- <title><%= content_for?(:title) ? yield(:title) + ' - ' : '' %>Schedule Miner</title>
+ <title><%= content_for?(:title) ? yield(:title) + ' — ' : '' %>Schedule Miner</title>
  <%= stylesheet_link_tag    "application" %>
  <%= csrf_meta_tags %>
 </head>
@@ -36,9 +36,9 @@
     <!-- Collect the nav links, forms, and other cmontent for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><%= link_to "Departments", departments_path %></li>
-        <li><%= link_to "Teachers", teachers_path %></a></li>
-        <li><%= link_to "Schedules", schedules_path %></a></li>
+        <%= navbar_controller_entry "Departments", departments_path %>
+        <%= navbar_controller_entry "Teachers", teachers_path %>
+        <%= navbar_controller_entry "Schedules", schedules_path %>
       </ul>
       <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
@@ -86,13 +86,10 @@
   </div>
   <div class="container">
     <div class="row">
-      <div class="col-md-12"><%= yield %></div>
-      <% if false %>
-      <div class="large-12 columns expand">
+      <div class="col-md-12">
         <% if content_for?(:title) %><h1><%= yield(:title) %></h1><% end %>
         <%= yield %>
       </div>
-      <% end %>
     </div>
     <div class="row">
       <div class="col-md-12">
