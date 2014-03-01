@@ -11,4 +11,6 @@ class User < ActiveRecord::Base
       user.email = auth['info']['email']
     end
   end
+  
+  has_many :schedules
 end
