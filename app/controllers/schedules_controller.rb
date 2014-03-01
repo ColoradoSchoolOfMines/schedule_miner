@@ -24,9 +24,27 @@ class SchedulesController < ApplicationController
   end
 
   def update
+    @schedule = Schedule.find(params[:id])
+
+    respond_to do |format|
+      if @schedule.update_attributes(params[:schedule])
+        format.html { redirect_to @schedule, notice: 'Department was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @schedule.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
+    @schedule = Schedule.find(params[:id])
+    @scedule.destroy
+
+    respond_to do |format|
+      format.html { redirect_to schedules_url }
+      format.json { head :no_content }
+    end
   end
 
   def show
@@ -36,6 +54,7 @@ class SchedulesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @schedule }
     end
+
   end
 
   def new
