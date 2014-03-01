@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-  	@schedules = Schedules.all
+  	@schedules = Schedule.all
 
   	respond_to do |format|
   		format.html

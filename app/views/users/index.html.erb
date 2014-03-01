@@ -1,4 +1,4 @@
-<% content_for :title do %>Schedules<% end %>
+<% content_for :title do %><% current_user.first_name + ' ' + current_user.last_name %><% end %>
 
 <table>
 	<tr>
@@ -9,7 +9,7 @@
 	<tr>
 		<td><%= link_to schedule.name, schedule %></td>
 		<td><%= link_to 'Edit', edit_schedule_path(schedule) %></td>
-		<td><%= link_to 'Destroy', department, confirm: 'Are you sure?', method: :delete %></td>
+		<td><%= link_to 'Destroy', schedule, confirm: 'Are you sure?', method: :delete %></td>
 	</tr>
 <% end %>	
 </table>
