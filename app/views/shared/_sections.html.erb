@@ -28,3 +28,33 @@
   </tr>
 <% end %>
 </table>
+
+
+<% sections_by_time = sections.select { |s| s.start_time != "TBA"}.sort_by { |s| Time.parse(s.start_time) rescue nil} %>
+
+<table class="table">
+    <tr>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+    </tr>
+
+<% sections_by_time.each do |section| %>
+    <tr>
+        <% 'MTWRFS'.split("").each do |dow| %>
+            <td>
+                <% if section.days_of_week.include? dow %>
+                    <%= section.code %>
+                    <%= section.start_time %>
+                    <%= section.days_of_week %>
+                <% end %>
+            </td>
+        <% end %>
+        <td></td>
+    </tr>
+
+<% end %>
+</table>
