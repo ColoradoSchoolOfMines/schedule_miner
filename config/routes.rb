@@ -1,13 +1,18 @@
 ScheduleMiner::Application.routes.draw do
+  get "users/index"
+
   get "schedule/index"
 
   get "static/index"
   get 'static/update'
-  match 'update_schedules' => 'schedule#new'
+  match 'update_schedules' => 'schedules#new'
+  match 'user_profile' => 'users#index'
 
   resources :departments
 
   resources :schedules
+
+  resources :users
 
   resources :teachers
 
