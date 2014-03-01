@@ -1,2 +1,7 @@
-<h1>Schedule#index</h1>
-<p>Find me in app/views/schedule/index.html.erb</p>
+<% content_for :title do %>Editing schedule<% end %>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', @schedule %> |
+<%= link_to 'Back', schedules_path %>
+

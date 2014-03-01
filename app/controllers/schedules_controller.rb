@@ -39,7 +39,7 @@ class SchedulesController < ApplicationController
 
   def destroy
     @schedule = Schedule.find(params[:id])
-    @scedule.destroy
+    @schedule.destroy
 
     respond_to do |format|
       format.html { redirect_to schedules_url }
@@ -64,5 +64,9 @@ class SchedulesController < ApplicationController
       format.html # new.html.erb
       format.json { render json: @course }
     end
+  end
+
+  def edit
+    @schedule = Schedule.find(params[:id])
   end
 end
