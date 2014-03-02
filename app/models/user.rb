@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   def self.create_from_omniauth(auth)
     create! do |user|
       # user.provider = auth['provider']
-      user.uid = auth['uid']
+      user.uid = auth['id']
       user.first_name = auth['info']['first_name'] #Includes middle name, add gsub(/\s.+/, '') for just firstname
       user.last_name = auth['info']['last_name']
       user.email = auth['info']['email']

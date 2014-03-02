@@ -2,7 +2,7 @@ class SchedulesController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-  	@schedules = Schedule.find_all_by_user_id(current_user.id) || []
+  	@schedules = Schedule.find_all_by_user_id(params[:current_user_id])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @sections }
