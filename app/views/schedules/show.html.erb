@@ -4,4 +4,7 @@
 
 <%= render partial: 'shared/sections', locals: {sections: @schedule.sections} %>
 
-<%= link_to 'Back', schedules_path %>
+<table>
+	<td><%= link_to 'Back', courses_path %></td>
+	<td><%= link_to 'Edit', edit_schedule_path %></td>
+</table>

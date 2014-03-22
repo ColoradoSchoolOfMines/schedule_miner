@@ -1,5 +1,6 @@
 <% content_for :title do %>New course<% end %>
 
 <%= render 'form' %>
-
-<%= link_to 'Back', courses_path %>
+<table>
+	<td><%= link_to 'Back', courses_path %></td>
+	<td><%= link_to 'Edit', edit_schedule_path(schedule) %></td>
