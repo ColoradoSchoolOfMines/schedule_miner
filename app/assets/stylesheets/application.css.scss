@@ -48,26 +48,14 @@ $navbar-border-radius: 0;
 
 .top-buffer {margin-top: 20px;}
 
-input {
-	outline: none;
-}
-input[type=search] {
-	-webkit-appearance: textfield;
-	-webkit-box-sizing: content-box;
-	font-family: inherit;
-	font-size: 100%;
-}
-input::-webkit-search-decoration,
-input::-webkit-search-cancel-button {
-	display: none; 
-}
+/* Expandable Search Button */
 
 
 input[type=search] {
 	background: #ededed url(http://static.tumblr.com/ftv85bp/MIXmud4tx/search-icon.png) no-repeat 9px center;
 	border: solid 1px #ccc;
-	padding: 9px 10px 9px 32px;
-	width: 55px;
+	padding: 9px 10px 9px 28px;
+	width: 28px;
 	
 	-webkit-border-radius: 10em;
 	-moz-border-radius: 10em;
@@ -88,32 +76,18 @@ input[type=search]:focus {
 }
 
 
-input:-moz-placeholder {
-	color: #999;
-}
-input::-webkit-input-placeholder {
-	color: #999;
-}
-
 search_button input[type=search] {
 	width: 15px;
 	padding-left: 10px;
 	color: transparent;
 	cursor: pointer;
 }
-search_button input[type=search]:hover {
-	background-color: #fff;
-}
+
 search_button input[type=search]:focus {
-	width: 130px;
+	width: 150px;
 	padding-left: 32px;
 	color: #000;
 	background-color: #fff;
 	cursor: auto;
 }
-search_button input:-moz-placeholder {
-	color: transparent;
-}
-search_button input::-webkit-input-placeholder {
-	color: transparent;
-}
+
