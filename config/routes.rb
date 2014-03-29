@@ -5,6 +5,8 @@ ScheduleMiner::Application.routes.draw do
 
   get "static/index"
   get 'static/update'
+  get 'static/builder'
+
   match 'update_schedules' => 'schedules#new'
   match 'user_profile' => 'users#index'
   match 'user_edit' => 'users#edit'
@@ -77,6 +79,7 @@ ScheduleMiner::Application.routes.draw do
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
   root to: 'static#index', as: 'static'
+  root to: 'static#builder', as: 'builder'
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
