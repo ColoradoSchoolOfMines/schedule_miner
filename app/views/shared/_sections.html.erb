@@ -34,7 +34,7 @@
             <table>
                 <% @schedules.each do |schedule| %>
                 <tr>
-                    <td><%= link_to schedule.name %></td>
+                    <td><%= link_to schedule.name, schedule_add_path(schedule, section) %></td>
                 </tr>
                 <% end %>
             </table>
