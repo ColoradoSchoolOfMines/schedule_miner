@@ -8,7 +8,7 @@ module StaticHelper
 
     BANNER_URL = 'https://banner.mines.edu/prod/owa/bwckschd.p_get_crse_unsec'
     POST_PARAMS = {
-      'term_in'       => '201410',
+      'term_in'       => '201480',
       'sel_subj'      => ['dummy', 'AFGN','BIOL','CSM','CBEN','CHGN','CHGC','CEEN','CSCI','COOP','EPIC','EBGN','EENG','ENGY','EGGN','LIFL','GEGX','GEGN','GEOL','GPGN','HNRS','LAIS','MLGN','MATH','MEGN','MTGN','MSGN','MNGN','LIMU','NUGN','PEGN','PAGN','PHGN','SYGN'],
       'sel_day'       => 'dummy',
       'sel_schd'      => ['dummy','%'],
