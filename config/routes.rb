@@ -7,6 +7,7 @@ ScheduleMiner::Application.routes.draw do
   get 'static/update'
   match 'update_schedules' => 'schedules#new'
   match 'user_profile' => 'users#index'
+  match 'user_edit' => 'users#edit'
 
 
   resources :departments
