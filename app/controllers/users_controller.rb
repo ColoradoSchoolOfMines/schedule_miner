@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 	before_filter :authenticate_user!
 
 	def index
-	  
+	  	@user=@current_user
 		respond_to do |format|
 	  		format.html
 	  		format.json { render json: @schedules }
@@ -17,12 +17,8 @@ class UsersController < ApplicationController
 	  	@user=@current_user
 	  	
 	  	respond_to do |format|
-	  		format.html # index.html.erb
-	  		format.json { render json: @user }
+	  		format.html { redirect_to users_url, notice: "User was successfully updated" }
+	  		format.json { head :no_content }
 	  	end
-	end
-	  
-	def show
-	  	@user=@current_user
 	end
 end
