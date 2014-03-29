@@ -10,6 +10,7 @@
     <th>Days of week</th>
     <th>Room</th>
     <th>CRN</th>
+    <th>Add to Schedule</th>
   </tr>
 
 <% sections.each do |section| %>
@@ -25,6 +26,23 @@
     <td><%= section.days_of_week %></td>
     <td><%= link_to section.building_code, section.building %>&nbsp;<%= section.room_number %></td>
     <td><%= section.crn %></td>
+    <!--This is the pop-up for selecting schedule -->
+    <% if current_user %>
+        <td><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';
+        document.getElementById('fade').style.display='block'">Add to Schedules</a></p>
+        <div id="light" class="white_content">Select a Schedule: <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
+            <table>
+                <% @schedules.each do |schedule| %>
+                <tr>
+                    <td><%= link_to schedule.name %></td>
+                </tr>
+                <% end %>
+            </table>
+        </div>
+        <div id="fade" class="black_overlay"></div></td>
+    <% else %>
+        <td>Sign in to add to schedule</td>
+    <% end %>
   </tr>
 <% end %>
 </table>

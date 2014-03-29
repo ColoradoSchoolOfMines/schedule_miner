@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140223015757) do
+ActiveRecord::Schema.define(:version => 20140329185908) do
 
   create_table "buildings", :force => true do |t|
     t.string   "code"
@@ -80,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20140223015757) do
     t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.decimal  "admin_flag"
   end
 
 end

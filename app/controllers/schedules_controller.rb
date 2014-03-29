@@ -27,6 +27,7 @@ class SchedulesController < ApplicationController
   def update
     @schedule = Schedule.find(params[:id])
 
+
     respond_to do |format|
       if @schedule.update_attributes(params[:schedule])
         format.html { redirect_to @schedule, notice: 'Department was successfully updated.' }
@@ -70,4 +71,18 @@ class SchedulesController < ApplicationController
   def edit
     @schedule = Schedule.find(params[:id])
   end
+
+  def add
+    @schedule = Schedule.find(params[:id])
+    @section = section.find(params[:section_id])
+
+
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @schedule }
+    end
+
+  end
+
 end

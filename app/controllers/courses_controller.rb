@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+
   # GET /courses
   # GET /courses.json
   def index
@@ -14,6 +15,9 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @course = Course.find(params[:id])
+    if current_user
+      @schedules = Schedule.find_all_by_user_id(@current_user.id)
+    end
 
     respond_to do |format|
       format.html # show.html.erb

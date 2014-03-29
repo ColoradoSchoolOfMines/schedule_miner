@@ -8,9 +8,12 @@ ScheduleMiner::Application.routes.draw do
   match 'update_schedules' => 'schedules#new'
   match 'user_profile' => 'users#index'
 
+
   resources :departments
 
-  resources :schedules
+  resources :schedules do
+      get 'add/:section_id' => 'schedules#add', as: 'add'
+  end
 
   resources :users
 
