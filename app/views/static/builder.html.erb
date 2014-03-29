@@ -1,4 +1,30 @@
-<!DOCTYPE html>
 <% content_for :title do %>Schedule Builder<% end %>
 
-</html>
+<b>Add sections by CRN</b>
+
+<form name="input" action="CRN.asp" method="get">
+CRN: <input type="text" name="CRN">
+<input type="submit" value="Submit">
+</form> 
+
+<br />
+
+<table>
+<tr>
+	<th>Department</th>
+	<th>Course Number</th>
+	<th>Section</th>
+</tr>
+<tr>
+<form name="input1" action="input.asp" method="get">
+	<td><input type="text" name="Department"></td>
+	<td><input type="text" name="Course Number"></td>
+	<td><input type="text" name="Section"></td>
+</tr>
+<tr>
+	<td colspan = 3><input type="submit" value="Submit"></td>
+</tr>
+</form>
+</table>
+
+<br />
