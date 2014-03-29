@@ -34,6 +34,7 @@
 
 <table class="table">
     <tr>
+        <th>Time</th>
         <th>Monday</th>
         <th>Tuesday</th>
         <th>Wednesday</th>
@@ -42,19 +43,71 @@
         <th>Saturday</th>
     </tr>
 
+<% current_start_time = "" %>
+<% current_end_time = "" %>
+<% section_list = Array.new %>
+<% times_by_interval = Array.new %>
+
+<!--
 <% sections_by_time.each do |section| %>
     <tr>
         <% 'MTWRFS'.split("").each do |dow| %>
             <td>
                 <% if section.days_of_week.include? dow %>
-                    <%= section.code %>
-                    <%= section.start_time %>
-                    <%= section.days_of_week %>
+                    <% section_list << section %>
+                    <% if ((section.start_time != current_start_time) or (section.end_time != current_end_time)) %>
+                        <% current_start_time = section.start_time %>
+                        <% current_end_time = section.end_time %>
+                        <% if section_list.size == 1 %>
+                            <%= "Sec " + section.code + " -" %>
+                            <%= section.start_time %>
+                            <%= section.days_of_week %>
+                        <% else %>
+                            <%= "Sections: " %>
+                            <% section_list.each do |mySection| %>
+                                <%= mySection.code + ", " %>
+                            <% end %>
+                        <% end %>
+                        <% section_list.clear %>
+                    <% else %>
+                        <%= "" %>
+                    <% end %>
                 <% end %>
             </td>
         <% end %>
         <td></td>
     </tr>
 
+<% end %>-->
+
+<% def minutes_to_time(minutes) %>
+    <% hours = 8 %>
+    <% while minutes >= 60 do %>
+        <% hours = hours + 1 %>
+        <% minutes = minutes - 60 %>
+    <% end %>
+    <% if hours > 12 %>
+        <% hours = hours - 12 %>
+    <% end %>
+    <% if minutes == 0 %>
+        <% return hours.to_s + ":00" %>
+    <% end %>
+    <% return hours.to_s + ":" + minutes.to_s %>
 <% end %>
+
+<% minutes_in_a_day = 540 %>
+<% i = 0 %>
+<% while i < minutes_in_a_day do %>
+    <% times_by_interval << i %>
+    <% i = i+15 %>
+<% end %>
+
+<% times_by_interval.each do |time| %>
+    <tr>
+        <td>
+        <%= minutes_to_time(time) %>
+        </td>
+    </tr>
+<% end %>
+
 </table>
