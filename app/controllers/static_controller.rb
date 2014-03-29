@@ -3,6 +3,9 @@ class StaticController < ApplicationController
   def index
   end
 
+  def builder
+  end
+
   def update
     sm = StaticHelper::SMParser.new
     sm.noko_parse
