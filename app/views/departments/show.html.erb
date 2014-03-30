@@ -1,13 +1,12 @@
 <% content_for :title do %><%= @department.name %> (<%= @department.code %>)<% end %>
+
 <p id="notice"><%= notice %></p>
 
-<table>
+<table class="departments">
   <tr>
-    <th>Code</th>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th><%= link_to "Code" %></th>
+    <th><%= link_to "Name" %></th>
+    <th colspan = 2>Settings</th>
   </tr>
 
 <% @department.courses.each do |course| %>
