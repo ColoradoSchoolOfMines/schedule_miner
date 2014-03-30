@@ -1,20 +1,6 @@
-# replace FILESYSTEM_LOCATION with the location in the filesystem
-#   example: /var/www/localhost/htdocs/directory/miner
-#   (note the lack of a trailing slash)
-# replace WEB_LOCATION with the URL
-#   example: /directory/miner/
-#   (note the trailing slash)
-
 <IfModule mod_rewrite.c>
-	RewriteEngine On
-
+  RewriteEngine On
    # force SSL
    RewriteCond %{HTTPS} !=on
    RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
-
-   # redirect URLs into core unless they match one of the resources
-	RewriteBase schedule_miner/
-	RewriteRule ^(C:/Users/Tyler/Dropbox/COLLEGE/College/acmX/schedule_miner$) C:/Users/Tyler/Dropbox/COLLEGE/College/acmX/schedule_miner/core.php [L]
-	RewriteRule ^www/ - [L]
-	RewriteRule ^(.*)$ C:/Users/Tyler/Dropbox/COLLEGE/College/acmX/schedule_miner/core.php?$1?%{QUERY_STRING} [L]
 </IfModule>
