@@ -102,4 +102,18 @@ class SchedulesController < ApplicationController
     end 
   end
 
+  def duplicate
+    old.schedule = Schedule.find(params[:schedule_id])
+
+    respond_to do |format|
+        if (neW.schedule = Schedule.new(old.schedule.attributes))
+        format.html { redirect_to schedule, notice: 'Successfully dupliacted schedule.' }
+        format.json { render json: schedule, status: :created, location: schedule }
+      else
+        format.html { redirect_to schedule, notice: 'Can not duplicate schedule.' }
+        format.json { render json: schedule.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 end

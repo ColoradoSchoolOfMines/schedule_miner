@@ -17,6 +17,7 @@ ScheduleMiner::Application.routes.draw do
   resources :schedules do
       get 'add/:section_id' => 'schedules#add', as: 'add'
       get 'remove/:section_id' => 'schedules#remove', as: 'remove'
+      get 'duplicate/:section_id' => 'schedules#duplicate', as: 'duplicate'
   end
 
   resources :users
