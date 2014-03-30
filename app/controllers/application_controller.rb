@@ -20,5 +20,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_user, :correct_user?, :authenticate_user!
+  def user_schedules 
+    if current_user
+      return Schedule.find_all_by_user_id(@current_user.id)
+    end
+  end
+
+  helper_method :current_user, :correct_user?, :authenticate_user!, :user_schedules
 end
