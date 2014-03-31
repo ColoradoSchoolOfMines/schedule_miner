@@ -10,19 +10,19 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-	  	@user=@current_user
+	  	user=@current_user
 	end
 	  
 	def update
-	  	@user=@current_user
+	  	user=@current_user
 	  	
 	  	respond_to do |format|
-	  		if @user.update_attributes(params[:admin_flag])
+	  		if user.update_attributes(params[:admin_flag])
 	  			format.html { redirect_to users_url, notice: "User was successfully updated" }
 	  			format.json { head :no_content }
 	  		else
 	  			format.html { render action: "edit" }
-	  			format.json { render json: @user.errors, status: :unprocessable_entity }
+	  			format.json { render json: user.errors, status: :unprocessable_entity }
 	  		end
 	  	end
 	end
