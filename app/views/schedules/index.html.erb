@@ -6,21 +6,16 @@
 <table class="schedules">
   <tr>
     <th><%= link_to "Name" %></th>
-    <% if current_user.admin_flag == 0 %>
-      <th colspan="3">Settings</th>
-    <% else %>
-      <th>Settings</th>
-    <% end %>
+    <th colspan="3">Settings</th>
   </tr>
 <% @schedules.each do |schedule| %>
   <tr>
     <td><%= link_to schedule.name, schedule %></td>
-    <% if current_user.admin_flag == 0 %>
     <td><%= link_to 'Edit', edit_schedule_path(schedule) %></td>
     <td><%= link_to 'Destroy', schedule, confirm: 'Are you sure?', method: :delete %></td>
-    <% else %>
-    <% end %>
     <td><%= link_to 'Duplicate', schedule %></td>
+
+
   </tr>
 <% end %>
 </table>

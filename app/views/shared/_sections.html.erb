@@ -39,7 +39,7 @@
             <table>
             <% if !user_schedules || user_schedules.empty?  %>
                 <tr>
-                    <td>lel so empty in here</td>
+                    <td><input id="show-button" type="button" value="New Schedule"><form id="input-form">Name:<input type="text" name="Name"><input type="submit" value="Create"></form></td>
                 </tr>
             <% else %>
                 <% user_schedules.each do |schedule| %>
