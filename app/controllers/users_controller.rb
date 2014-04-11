@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 	  	user=@current_user
 	  	
 	  	respond_to do |format|
-	  		if user.update_attributes(params[:admin_flag])
+	  		if user.update_attributes(params[:user])
 	  			format.html { redirect_to users_url, notice: "User was successfully updated" }
 	  			format.json { head :no_content }
 	  		else
