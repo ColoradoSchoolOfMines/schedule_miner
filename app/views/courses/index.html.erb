@@ -12,7 +12,11 @@
     <th><%= link_to "Code" %></th>
     <th><%= link_to "Name" %></th>
     <th><%= link_to "Department" %></th>
-    <th colspan="3"><%= link_to "Settings" %></th>
+    <% if current_user.admin_flag == 0 %>
+      <th colspan="3">Settings></th>
+    <% else %>
+      <th>Settings</th>
+    <% end %>
   </tr>
 
 <% for course in @courses %>
@@ -20,8 +24,10 @@
     <td><%= course.department_code %>&nbsp;<%= course.course_number %></td>
     <td><%= link_to course.name, course %></td>
     <td><%= link_to course.department.name, course.department %>
-    <td><%= link_to 'Edit', edit_course_path(course) %></td>
-    <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
+    <% if current_user.admin_flag == 0 %>
+      <td><%= link_to 'Edit', edit_course_path(course) %></td>
+      <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
     <td>Add to Schedule</td>
   </tr>
 <% end %>

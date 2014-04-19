@@ -1,21 +1,24 @@
 <% content_for :title do %><%= @department.name %> (<%= @department.code %>)<% end %>
+
 <p id="notice"><%= notice %></p>
 
-<table>
+<table class="departments">
   <tr>
-    <th>Code</th>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th><%= link_to "Code" %></th>
+    <th><%= link_to "Name" %></th>
+    <% if current_user.admin_flag == 0 %>
+      <th colspan = 2>Settings</th>
+    <% end %>
   </tr>
 
 <% @department.courses.each do |course| %>
   <tr>
     <td><%= course.department_code %>&nbsp;<%= course.course_number %></td>
     <td><%= link_to course.name, course %></td>
-    <td><%= link_to 'Edit', edit_course_path(course) %></td>
-    <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
+    <% if current_user.admin_flag == 0 %>
+      <td><%= link_to 'Edit', edit_course_path(course) %></td>
+      <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

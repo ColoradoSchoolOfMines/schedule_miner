@@ -1,0 +1,12 @@
+<html>
+	<%= form_for(@current_user) do |f| %>
+		<div class="field">
+			<%= f.label "admin" %>
+			<%= f.text_field :admin_flag %>
+		</div>
+		<div class="actions">
+			<%= f.submit %>
+		</div>
+	<% end %>
+</html>
+

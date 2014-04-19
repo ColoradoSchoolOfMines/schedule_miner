@@ -1,0 +1,9 @@
+<% content_for :title do %><%= @current_user.first_name.split(" ")[0] %><% end %>
+<p id="notice"><%= notice %></p>
+
+<!--%= render partial: 'shared/sections', locals: {sections: @schedule.sections} %-->
+
+<table>
+	<td><%= link_to 'Back', courses_path %></td>
+	<td><%= link_to 'Edit', edit_schedule_path %></td>
+</table>

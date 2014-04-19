@@ -10,7 +10,11 @@
     <th>Days of week</th>
     <th>Room</th>
     <th>CRN</th>
-    <th>Add to Schedule</th>
+    <% if @schedule %>
+        <th>Delete</th>
+    <% else %>
+        <th>Add to Schedule</th>
+    <% end %>
   </tr>
 
 <% sections.each do |section| %>
@@ -27,19 +31,26 @@
     <td><%= link_to section.building_code, section.building %>&nbsp;<%= section.room_number %></td>
     <td><%= section.crn %></td>
     <!--This is the pop-up for selecting schedule -->
-    <% if current_user %>
-        <td><a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';
-        document.getElementById('fade').style.display='block'">Add to Schedules</a></p>
-        <div id="light" class="white_content">Select a Schedule: <a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">Close</a>
+    <% if @schedule %>
+        <td><%= link_to "Destroy", schedule_remove_path(@schedule, section) , confirm: 'Are you sure?' %></td>
+    <% elsif current_user %>
+        <td><a class="show_add" href="#">Add to Schedules</a></p>
+        <div class="white_content">Select a Schedule: <a class="hide_add" href = "#">Close</a>
             <table>
-                <% @schedules.each do |schedule| %>
+            <% if !user_schedules || user_schedules.empty?  %>
+                <tr>
+                    <td><input id="show-button" type="button" value="New Schedule"><form id="input-form">Name:<input type="text" name="Name"><input type="submit" value="Create"></form></td>
+                </tr>
+            <% else %>
+                <% user_schedules.each do |schedule| %>
                 <tr>
                     <td><%= link_to schedule.name, schedule_add_path(schedule, section) %></td>
                 </tr>
                 <% end %>
+            <% end %>
             </table>
         </div>
-        <div id="fade" class="black_overlay"></div></td>
+        <div class="black_overlay"></div></td>
     <% else %>
         <td>Sign in to add to schedule</td>
     <% end %>

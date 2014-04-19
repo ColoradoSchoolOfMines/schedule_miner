@@ -4,9 +4,7 @@ class TeachersController < ApplicationController
   # GET /teachers.json
   def index
     @teachers = Teacher.order('teachers.name').all
-    if current_user
-      @schedules = Schedule.find_all_by_user_id(@current_user.id)
-    end
+    
 
     respond_to do |format|
       format.html # index.html.erb

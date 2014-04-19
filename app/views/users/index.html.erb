@@ -13,7 +13,7 @@
 </tr>
 <tr>
 	<td><%= current_user.first_name.gsub(/\s.+/, '') %></td>
-	<td>Middle Name</td>
+	<td><%= current_user.first_name.split(" ")[1] %></td>
 	<td><%= current_user.last_name %></td>
 	<td><%= current_user.email %></td>
 	<td><% if current_user.admin_flag == 1 %>
@@ -22,7 +22,7 @@
 			Yes
 		<% end %>
 	</td>
-	<td><%= link_to "Edit" %></td>
+	<td><%= link_to "Edit" , user_edit_path %></td>
 </tr>
 
 </table>
