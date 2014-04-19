@@ -61,70 +61,59 @@
         <th>Saturday</th>
     </tr>
 
-<% current_start_time = "" %>
-<% current_end_time = "" %>
-<% section_list = Array.new %>
 <% times_by_interval = Array.new %>
 
-<!--
-<% sections_by_time.each do |section| %>
-    <tr>
-        <% 'MTWRFS'.split("").each do |dow| %>
-            <td>
-                <% if section.days_of_week.include? dow %>
-                    <% section_list << section %>
-                    <% if ((section.start_time != current_start_time) or (section.end_time != current_end_time)) %>
-                        <% current_start_time = section.start_time %>
-                        <% current_end_time = section.end_time %>
-                        <% if section_list.size == 1 %>
-                            <%= "Sec " + section.code + " -" %>
-                            <%= section.start_time %>
-                            <%= section.days_of_week %>
-                        <% else %>
-                            <%= "Sections: " %>
-                            <% section_list.each do |mySection| %>
-                                <%= mySection.code + ", " %>
-                            <% end %>
-                        <% end %>
-                        <% section_list.clear %>
-                    <% else %>
-                        <%= "" %>
-                    <% end %>
-                <% end %>
-            </td>
-        <% end %>
-        <td></td>
-    </tr>
+<% def minutes_to_time(first_class_time, minutes) %>
 
-<% end %>-->
+    <% hours = first_class_time %>
+    <% meridiem = "AM" %>
 
-<% def minutes_to_time(minutes) %>
-    <% hours = 8 %>
     <% while minutes >= 60 do %>
         <% hours = hours + 1 %>
         <% minutes = minutes - 60 %>
     <% end %>
+
+    <% if hours > 11 %>
+        <% meridiem = "PM" %>
+    <% end %>
+
     <% if hours > 12 %>
         <% hours = hours - 12 %>
     <% end %>
+
     <% if minutes == 0 %>
-        <% return hours.to_s + ":00" %>
+        <% return hours.to_s + ":00" + meridiem %>
     <% end %>
-    <% return hours.to_s + ":" + minutes.to_s %>
+
+    <% return hours.to_s + ":" + minutes.to_s + meridiem %>
+
 <% end %>
 
-<% minutes_in_a_day = 540 %>
+<% first_class_time = 8 %>
+<% last_class_time = 5 %>
+<% minutes_in_a_day = (last_class_time+12-first_class_time)*60 %>
 <% i = 0 %>
-<% while i < minutes_in_a_day do %>
-    <% times_by_interval << i %>
+<% while i <= minutes_in_a_day do %>
+    <% times_by_interval << minutes_to_time(first_class_time, i) %>
     <% i = i+15 %>
 <% end %>
 
+<!--<%= sections_by_time %>-->
+
 <% times_by_interval.each do |time| %>
     <tr>
-        <td>
-        <%= minutes_to_time(time) %>
-        </td>
+        <td><%= time %></td>
+        <% 'MTWRFS'.split("").each do |dow| %>
+            <td>
+            <% sections_by_time.each do |section| %>
+                <% if ((section.days_of_week.include? dow) and (time == section.start_time)) %>
+                    <%= section.course.department_code + " " + section.course.course_number %>
+                    <%= "Sec " + section.code + " -" %> <br>
+                    <%= section.start_time %> to <%= section.end_time %><br><br>
+                <% end %>
+            <% end %>
+            </td>
+        <% end %>
     </tr>
 <% end %>
 
