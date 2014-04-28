@@ -16,10 +16,10 @@
 	<td><%= current_user.first_name.split(" ")[1] %></td>
 	<td><%= current_user.last_name %></td>
 	<td><%= current_user.email %></td>
-	<td><% if current_user.admin_flag == 1 %>
-			No
-		<% else %>
+	<td><% if user_has? :admin %>
 			Yes
+    <% else %>
+      No
 		<% end %>
 	</td>
 	<td><%= link_to "Edit" , user_edit_path %></td>

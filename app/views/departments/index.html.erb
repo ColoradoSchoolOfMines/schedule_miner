@@ -5,7 +5,7 @@
   <tr>
     <th><%= link_to "Code" %></th>
     <th><%= link_to "Name" %></th>
-    <% if current_user.admin_flag == 0 %>
+    <% if user_has? :admin %>
       <th colspan="2">Settings</th>
     <% end %>
   </tr>
@@ -14,7 +14,7 @@
   <tr>
     <td><%= department.code %></td>
     <td><%= link_to department.name, department %></td>
-    <% if current_user.admin_flag == 0 %>
+    <% if user_has? :admin %>
       <td><%= link_to 'Edit', edit_department_path(department) %></td>
       <td><%= link_to 'Destroy', department, confirm: 'Are you sure?', method: :delete %></td>
     <% end %>

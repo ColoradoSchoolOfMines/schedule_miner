@@ -20,6 +20,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def user_has? permission
+    if current_user
+      if permission == :admin and current_user.admin_flag == 0
+        return true
+      end
+    end
+
+    false
+
   def user_schedules 
     if current_user
       return Schedule.find_all_by_user_id(@current_user.id)

@@ -6,7 +6,7 @@
   <tr>
     <th><%= link_to "Code" %></th>
     <th><%= link_to "Name" %></th>
-    <% if current_user.admin_flag == 0 %>
+    <% if user_has? :admin %>
       <th colspan = 2>Settings</th>
     <% end %>
   </tr>
@@ -15,7 +15,7 @@
   <tr>
     <td><%= course.department_code %>&nbsp;<%= course.course_number %></td>
     <td><%= link_to course.name, course %></td>
-    <% if current_user.admin_flag == 0 %>
+    <% if user_has? :admin %>
       <td><%= link_to 'Edit', edit_course_path(course) %></td>
       <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
     <% end %>

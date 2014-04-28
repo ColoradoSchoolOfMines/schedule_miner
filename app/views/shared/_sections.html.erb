@@ -1,6 +1,6 @@
 <h2>Sections</h2>
 
-<table class="table">
+<%= content_tag :table, id: "sections-display", class: "table", data: { sections: sections.select { |s| s.start_time != 'TBA' }.map { |s| s.serializable_hash.merge(start_min: parse_time(s.start_time), end_min: parse_time(s.end_time)) } } do %>
   <tr>
     <th>Course</th>
     <th>Section</th>
@@ -56,8 +56,24 @@
     <% end %>
   </tr>
 <% end %>
-</table>
+<% end %>
 
+<div id="sections-canvas"></div>
+
+<%
+  def parse_time(time)
+    hour, minute, meridian, = /(\d+):(\d+) ?(AM|PM)/.match(time).captures
+    unless hour
+      raise 'invalid time ' + time
+    end
+
+    if hour == '12'
+      hour = 0
+    end
+
+    (meridian == 'AM' ? hour.to_i : hour.to_i + 12) * 60 + minute.to_i
+  end
+%>
 
 <% sections_by_time = sections.select { |s| s.start_time != "TBA"}.sort_by { |s| Time.parse(s.start_time) rescue nil} %>
 
