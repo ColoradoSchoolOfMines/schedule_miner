@@ -28,6 +28,7 @@ class ApplicationController < ActionController::Base
     end
 
     false
+  end
 
   def user_schedules 
     if current_user
@@ -35,5 +36,5 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  helper_method :current_user, :correct_user?, :authenticate_user!, :user_schedules
+  helper_method :current_user, :correct_user?, :authenticate_user!, :user_has?, :user_schedules
 end
