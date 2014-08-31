@@ -1,8 +1,27 @@
 <h2>Sections</h2>
 
-<%= content_tag :table, id: "sections-display", class: "table", data: { sections: sections.select { |s| s.start_time != 'TBA' }.map { |s| s.serializable_hash.merge(start_min: parse_time(s.start_time), end_min: parse_time(s.end_time)) } } do %>
+<%
+  def parse_time(time)
+    hour, minute, meridian, = /(\d+):(\d+) ?(AM|PM)/.match(time).captures
+    unless hour
+      raise 'invalid time ' + time
+    end
+
+    if hour == '12'
+      hour = 0
+    end
+
+    (meridian == 'AM' ? hour.to_i : hour.to_i + 12) * 60 + minute.to_i
+  end
+%>
+
+<%= content_tag(:table,
+				id: "sections-display",
+				class: "table",
+				data: { sections: sections.select { |s| s.start_time != 'TBA' }.map { |s| s.serializable_hash.merge(start_min: parse_time(s.start_time), end_min: parse_time(s.end_time), course: s.course.serializable_hash) } }
+			    ) do %>
   <tr>
-    <th>Course</th>
+    <th colspan="2">Course</th>
     <th>Section</th>
     <th>Teacher</th>
     <th>Start time</th>
@@ -20,6 +39,7 @@
 <% sections.each do |section| %>
   <tr>
     <td><%= link_to section.course.name, section.course %></td>
+    <td><%= section.course.department_code %>&nbsp;<%= section.course.course_number %></td>
     <td><%= section.code %></td>
     <td><% section.teachers.each do |teacher|%> 
         <%= link_to Teacher.find(teacher.id).name, Teacher.find(teacher.id) %>
@@ -56,92 +76,6 @@
     <% end %>
   </tr>
 <% end %>
-<% end %>
-
-<div id="sections-canvas"></div>
-
-<%
-  def parse_time(time)
-    hour, minute, meridian, = /(\d+):(\d+) ?(AM|PM)/.match(time).captures
-    unless hour
-      raise 'invalid time ' + time
-    end
-
-    if hour == '12'
-      hour = 0
-    end
-
-    (meridian == 'AM' ? hour.to_i : hour.to_i + 12) * 60 + minute.to_i
-  end
-%>
-
-<% sections_by_time = sections.select { |s| s.start_time != "TBA"}.sort_by { |s| Time.parse(s.start_time) rescue nil} %>
-
-<table class="table">
-    <tr>
-        <th>Time</th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th>Saturday</th>
-    </tr>
-
-<% times_by_interval = Array.new %>
-
-<% def minutes_to_time(first_class_time, minutes) %>
-
-    <% hours = first_class_time %>
-    <% meridiem = "AM" %>
-
-    <% while minutes >= 60 do %>
-        <% hours = hours + 1 %>
-        <% minutes = minutes - 60 %>
-    <% end %>
-
-    <% if hours > 11 %>
-        <% meridiem = "PM" %>
-    <% end %>
-
-    <% if hours > 12 %>
-        <% hours = hours - 12 %>
-    <% end %>
-
-    <% if minutes == 0 %>
-        <% return hours.to_s + ":00" + meridiem %>
-    <% end %>
-
-    <% return hours.to_s + ":" + minutes.to_s + meridiem %>
-
-<% end %>
-
-<% first_class_time = 8 %>
-<% last_class_time = 5 %>
-<% minutes_in_a_day = (last_class_time+12-first_class_time)*60 %>
-<% i = 0 %>
-<% while i <= minutes_in_a_day do %>
-    <% times_by_interval << minutes_to_time(first_class_time, i) %>
-    <% i = i+15 %>
-<% end %>
-
-<!--<%= sections_by_time %>-->
-
-<% times_by_interval.each do |time| %>
-    <tr>
-        <td><%= time %></td>
-        <% 'MTWRFS'.split("").each do |dow| %>
-            <td>
-            <% sections_by_time.each do |section| %>
-                <% if ((section.days_of_week.include? dow) and (time == section.start_time)) %>
-                    <%= section.course.department_code + " " + section.course.course_number %>
-                    <%= "Sec " + section.code + " -" %> <br>
-                    <%= section.start_time %> to <%= section.end_time %><br><br>
-                <% end %>
-            <% end %>
-            </td>
-        <% end %>
-    </tr>
 <% end %>
 
 </table>

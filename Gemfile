@@ -13,7 +13,7 @@ gem 'json'
 # in production environments by default.
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
-  gem 'coco-rails', '~> 0.1.0'
+  gem 'coffee-rails'
   gem 'bootstrap-sass', '~>3.0.1.0.rc'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer'

@@ -33,11 +33,13 @@ GEM
       sass (~> 3.2)
     builder (3.0.4)
     chunky_png (1.2.8)
-    coco-rails (0.1.0)
-      railties (~> 3.1, < 4.0)
-      ruby-coco
-      sprockets (~> 2.0)
-      tilt (~> 1.1, != 1.3.0)
+    coffee-rails (3.2.2)
+      coffee-script (>= 2.2.0)
+      railties (~> 3.2.0)
+    coffee-script (2.3.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.8.0)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -118,10 +120,6 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
-    ruby-coco (0.1.0)
-      execjs
-      ruby-coco-source
-    ruby-coco-source (0.9.1)
     ruby-openid (2.3.0)
     ruby-openid-apps-discovery (1.2.0)
       ruby-openid (>= 2.1.7)
@@ -154,7 +152,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 3.0.1.0.rc)
-  coco-rails (~> 0.1.0)
+  coffee-rails
   compass
   jquery-rails
   json
