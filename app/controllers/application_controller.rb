@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   def user_schedules 
     if current_user
-      return Schedule.find_all_by_user_id(@current_user.id)
+      return Schedule.find_all_by_user_id(@current_user.uid)
     end
   end
 

@@ -62,14 +62,16 @@
                         <span class="header-content">Schedules:</span>
                      <button type="button" class="close">&times;</button>
                     </div>
-                    <div class="modal-body">Select a Schedule:
+                    <div class="modal-body">Select a Schedule:<br />
                         <table>
-                            <% if !user_schedules || user_schedules.empty? %>
+                           <% user_schedules.each do |schedule| %>
+                                <tr>
+                                    <td><%= link_to schedule.name, schedule_add_path(schedule, section) %></td>
+                                </tr>
+                            <% end %>
                                 <tr>
                                     <td>
                                         <input class="show-button btn btn-primary" type="button" value="New Schedule">
-                                        <br />
-
                                         <form class="input-form">
                                         <div class="input-group">
                                         <span class="input-group-addon">Name:</span>
@@ -80,13 +82,6 @@
                                         </form>
                                     </td>
                                 </tr>
-                            <% else %>
-                               <% user_schedules.each do |schedule| %>
-                                <tr>
-                                    <td><%= link_to schedule.name, schedule_add_path(schedule, section) %></td>
-                                </tr>
-                                <% end %>
-                            <% end %>
                     </table>
                     </div>
                 </div>
