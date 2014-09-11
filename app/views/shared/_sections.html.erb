@@ -54,7 +54,36 @@
     <% if @schedule %>
         <td><%= link_to "Destroy", schedule_remove_path(@schedule, section) , confirm: 'Are you sure?' %></td>
     <% elsif current_user %>
-        <td><a class="show_add" href="#">Add to Schedules</a></p>
+        <td><a class="add" data-toggle="modal" href="#">Add to Schedule</a>
+            <div class="modal in fade">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        Schedules:
+                     <button type="button" class="close">&times;</button>
+                    </div>
+                    <div class="modal-body">Select a Schedule:
+                        <table>
+                            <tr>
+                                <% if !user_schedules || user_schedules.empty? %>
+                                    <tr>
+                                        <td><input class="show-button" type="button" value="New Schedule"><form class="input-form">Name:<input type="text" name="Name"><input type="submit" value="Create"></form></td>
+                                    </tr>
+                                <% else %>
+                                    <% user_schedules.each do |schedule| %>
+                                        <tr>
+                                            <td><%= link_to schedule.name, schedule_add_path(schedule, section) %></td>
+                                        </tr>
+                                    <% end %>
+                                <% end %>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </td>
+        <!--
         <div class="white_content">Select a Schedule: <a class="hide_add" href = "#">Close</a>
             <table>
             <% if !user_schedules || user_schedules.empty?  %>
@@ -70,7 +99,9 @@
             <% end %>
             </table>
         </div>
-        <div class="black_overlay"></div></td>
+        <div class="black_overlay"></div></td>-->
+    <!-- This case should never happen because you should have to
+    be signed in to see this page -->
     <% else %>
         <td>Sign in to add to schedule</td>
     <% end %>
