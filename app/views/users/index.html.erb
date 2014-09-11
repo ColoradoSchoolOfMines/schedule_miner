@@ -2,7 +2,7 @@
 <% content_for :title do %>Profile<% end %>
 
 <body>
-<table class="users">
+<table class="table">
 <tr>
 	<th>First Name</th>
 	<th>Middle Name</th>
@@ -20,7 +20,7 @@
 			Yes
     <% else %>
       No
-		<% end %>
+	<% end %>
 	</td>
 	<td><%= link_to "Edit" , user_edit_path %></td>
 </tr>

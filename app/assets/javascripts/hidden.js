@@ -35,7 +35,6 @@ $(document).ready(function() {
 	}
 
 	//todo: bind create button
-	//show schedules properly
 
 });
 

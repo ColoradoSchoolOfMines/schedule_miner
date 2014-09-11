@@ -52,7 +52,7 @@
     <td><%= section.crn %></td>
     <!--This is the pop-up for selecting schedule -->
     <% if @schedule %>
-        <td><%= link_to "Destroy", schedule_remove_path(@schedule, section) , confirm: 'Are you sure?' %></td>
+        <td><%= link_to "Remove", schedule_remove_path(@schedule, section) , confirm: 'Are you sure?' %></td>
     <% elsif current_user %>
         <td><a class="add" data-toggle="modal" href="#">Add to Schedule</a>
             <div class="modal in fade">

@@ -14,7 +14,7 @@
     <td><%= building.code %></td>
     <td><%= link_to building.name, building %></td>
     <td><%= link_to 'Edit', edit_building_path(building) %></td>
-    <td><%= link_to 'Destroy', building, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Remove', building, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
