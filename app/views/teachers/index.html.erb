@@ -13,7 +13,7 @@
         <% teachers_chunked[letter].each do |teacher| %>
           <div class="teacher-button">
           <%= link_to teacher_path(teacher), class: "btn btn-default" do %>
-            <span class="badge pull-radius"><%= teacher.sections.count %></span>
+            <span class="badge pull-radius"><%= teacher.sections_count %></span>
             <%= teacher.name %>
           <% end %>
           </div>

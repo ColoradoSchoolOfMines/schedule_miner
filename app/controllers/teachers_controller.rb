@@ -3,8 +3,8 @@ class TeachersController < ApplicationController
   # GET /teachers
   # GET /teachers.json
   def index
-    @teachers = Teacher.order('teachers.name').all
-    
+    # Prefetch teacher count to avoid a bazillion on-demand joins.
+    @teachers = Teacher.order('teachers.name').joins(:sections).select('teachers.*, COUNT(sections_teachers.section_id) `sections_count`').group('teachers.id')
 
     respond_to do |format|
       format.html # index.html.erb
