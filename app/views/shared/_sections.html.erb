@@ -38,8 +38,8 @@
 
 <% sections.each do |section| %>
   <tr>
-    <td ><%= link_to section.course.name, section.course %></td>
     <td><%= section.course.department_code %>&nbsp;<%= section.course.course_number %></td>
+    <td><%= link_to section.course.name, section.course %></td>
     <td><%= section.code %></td>
     <td><% section.teachers.each do |teacher|%> 
         <%= link_to Teacher.find(teacher.id).name, Teacher.find(teacher.id) %>

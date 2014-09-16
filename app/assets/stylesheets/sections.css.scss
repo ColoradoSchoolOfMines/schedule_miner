@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #section-calendar {
-  background: #F4F4F4;
+  background: #FFFFFF;
   position: relative;
 }
 
@@ -14,7 +14,7 @@
 .section-calendar-contents {
   background: white;
   border: 1px solid #DDD;
-  box-shadow: -5px 0 5px rgba(244, 244, 244, 1.0);
+  box-shadow: -5px 0 5px rgba(248, 248, 248, 1.0);
   height: 100%;
   overflow: hidden;
   padding: 10px;
@@ -28,7 +28,6 @@
 .section-calendar-contents li {
   display: block;
   font-size: 80%;
-  font-weight: bold;
   list-style-type: none;
   margin: 0;
   margin-bottom: 10px;

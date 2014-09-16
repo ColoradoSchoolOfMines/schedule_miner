@@ -22,12 +22,42 @@ WEEKDAY_NUM_MAP = {
   6: 'S',
 }
 
-# ## Styling options
-# This sets the amount by which each overlapping slot is moved back onto the previous one.
-SLOT_OVERLAP = 5
+WEEKDAY_LABEL_MAP = {
+  1: 'Monday',
+  2: 'Tuesday',
+  3: 'Wednesday',
+  4: 'Thursday',
+  5: 'Friday',
+  6: 'Saturday',
+}
 
-# This sets the padding on the right side of each weekday.
-WEEKDAY_PAD = 10
+# ## Styling options
+S =
+  CALENDAR:
+    BACKGROUND: '#FBFBFB'
+    HEIGHT_SCALE: 0.007
+    PAD_BOTTOM: 20
+
+  SLOT:
+    # This sets the amount by which each overlapping slot is moved back onto the previous one.
+    OVERLAP: 5
+
+  TIME_DIVISION:
+    COLOR: '#DDDDDD'
+
+  TIME_DIVISION_HEAVY:
+    COLOR: '#D6D6D6'
+
+  TIME_LABEL:
+    FONT: '12px "Exo 2"'
+    W: 100
+
+  WEEKDAY:
+    MARGIN_LEFT: 10
+
+  WEEKDAY_LABEL:
+    FONT: 'bold 14px "Exo 2"'
+    H: 50
 
 # # Utility functions
 
@@ -208,6 +238,7 @@ layout_calendar = (sections) ->
   max_weekday: max_weekday
   weekday_chunks: weekday_chunks
 
+
 # # Rendering
 # Takes precalculated layout data and renders it to the screen. Called on any screen resize.
 #
@@ -230,26 +261,81 @@ render_calendar = (layout) ->
 
   # Then, we calculate the size of the calendar. The width of the calendar is determined by the
   # layout, but the height is scaled to the width and the displayed time span.
-  C_WIDTH = $calendar[0].clientWidth
-  C_HEIGHT = C_WIDTH * time_span / (weekday_span * 100)
+  #
+  # Before it can be fetched, though, we need to apply the padding for the time and weekday labels.
+  $calendar.css
+    paddingLeft: S.TIME_LABEL.W
+    paddingTop: S.WEEKDAY_LABEL.H
+    paddingBottom: S.CALENDAR.PAD_BOTTOM
+  RENDER_WIDTH = $calendar[0].clientWidth
+  C_WIDTH = RENDER_WIDTH - S.TIME_LABEL.W
+  RENDER_HEIGHT = C_WIDTH * time_span / weekday_span * S.CALENDAR.HEIGHT_SCALE
+  C_HEIGHT = RENDER_HEIGHT - S.WEEKDAY_LABEL.H - S.CALENDAR.PAD_BOTTOM
   $calendar.height C_HEIGHT
 
   PX_PER_WDAY = C_WIDTH / weekday_span
   PX_PER_MIN = C_HEIGHT / time_span
 
+  # ## Background
+  # The background, including weekday/time markers, is rendered on a canvas then applied to the
+  # calendar as a background image.
+  buffer = document.createElement 'canvas'
+  buffer.width = $calendar[0].clientWidth
+  buffer.height = RENDER_HEIGHT
+  ctx = buffer.getContext '2d'
+
+  ctx.fillStyle = S.CALENDAR.BACKGROUND
+  ctx.fillRect S.TIME_LABEL.W, S.WEEKDAY_LABEL.H, C_WIDTH, C_HEIGHT
+
+  for weekday in [layout.min_weekday..layout.max_weekday]
+    ctx.font = S.WEEKDAY_LABEL.FONT
+    ctx.textBaseline = 'middle'
+    ctx.textAlign = 'center'
+    ctx.fillStyle = 'black'
+    ctx.fillText WEEKDAY_LABEL_MAP[weekday], S.TIME_LABEL.W + PX_PER_WDAY * (weekday - layout.min_weekday) + (PX_PER_WDAY - S.WEEKDAY.MARGIN_LEFT) / 2 + S.WEEKDAY.MARGIN_LEFT, S.WEEKDAY_LABEL.H / 2
+
+  for time in [start_time..end_time] by 60
+    y = S.WEEKDAY_LABEL.H + PX_PER_MIN * (time - start_time)
+    ctx.strokeStyle = S.TIME_DIVISION.COLOR
+    ctx.beginPath()
+    ctx.lineWidth = 1
+    ctx.moveTo S.TIME_LABEL.W - 10, y
+    ctx.lineTo RENDER_WIDTH, y
+    ctx.stroke()
+
+    for weekday in [layout.min_weekday..layout.max_weekday]
+      ctx.strokeStyle = S.TIME_DIVISION_HEAVY.COLOR
+      ctx.beginPath()
+      ctx.lineWidth = 2
+      ctx.moveTo S.TIME_LABEL.W + PX_PER_WDAY * (weekday - layout.min_weekday) + S.WEEKDAY.MARGIN_LEFT, y
+      ctx.lineTo S.TIME_LABEL.W + PX_PER_WDAY * (weekday - layout.min_weekday + 1), y
+      ctx.stroke()
+
+    ctx.font = S.TIME_LABEL.FONT
+    ctx.textBaseline = 'middle'
+    ctx.textAlign = 'right'
+    ctx.fillStyle = 'black'
+    ctx.fillText render_time(time), S.TIME_LABEL.W - 20, y
+
+  buffer.toDataURL 'image/png'
+  $calendar.css
+    backgroundImage: 'url(' + buffer.toDataURL('image/png') + ')'
+    backgroundRepeat: 'no-repeat'
+
+  # ## Slots
   for weekday in [layout.min_weekday..layout.max_weekday]
     for chunk in layout.weekday_chunks[weekday]
-      chunk_width = PX_PER_WDAY - WEEKDAY_PAD
+      chunk_width = PX_PER_WDAY - S.WEEKDAY.MARGIN_LEFT
       num_slots = chunk.max_width
-      slot_width = chunk_width / num_slots + (if num_slots > 1 then SLOT_OVERLAP / 2 else 0)
+      slot_width = chunk_width / num_slots + (if num_slots > 1 then S.SLOT.OVERLAP / 2 else 0)
 
       used_columns = 0
 
       for slot in chunk.slots
         $slot = $('<div class="section-calendar-slot"/>').appendTo $calendar
         $slot.css
-          left: PX_PER_WDAY * (weekday - layout.min_weekday) + slot_width * slot.disp_column - SLOT_OVERLAP * slot.disp_column
-          top: PX_PER_MIN * (slot.start_min - start_time)
+          marginLeft: PX_PER_WDAY * (weekday - layout.min_weekday) + S.WEEKDAY.MARGIN_LEFT + slot_width * slot.disp_column - S.SLOT.OVERLAP * slot.disp_column
+          marginTop: PX_PER_MIN * (slot.start_min - start_time)
         $slot.width slot_width
         $slot.height PX_PER_MIN * (slot.end_min - slot.start_min)
         used_columns += slot.disp_width
@@ -257,7 +343,7 @@ render_calendar = (layout) ->
         $contents = $('<div class="section-calendar-contents"><ol></ol></div>').appendTo $slot
 
         for section in slot.sections
-          $contents.find('ol').append('<li>' + section.course.department_code + ' ' + section.course.course_number + ' ' + section.code + '</li>')
+          $contents.find('ol').append('<li><b>' + section.course.department_code + ' ' + section.course.course_number + '</b> ' + section.code + '</li>')
 
 # # Event handlers
 # When the document is ready, run the layout and rendering passes.
