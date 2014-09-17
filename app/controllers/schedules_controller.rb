@@ -63,8 +63,8 @@ class SchedulesController < ApplicationController
     @schedule = Schedule.new
 
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @course }
+     format.html # new.html.erb
+     format.json { render json: @course }
     end
   end
 

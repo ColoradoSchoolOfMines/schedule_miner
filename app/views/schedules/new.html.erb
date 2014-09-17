@@ -1,5 +1,19 @@
 <% content_for :title do %>New schedule<% end %>
 
-<%= render 'form' %>
+<!--<%= render 'form' %>-->
+<hr /><br />
+<form class="input-form" style="margin-bottom:50px">
+	<div class="input-group" style="width:350px">
+  		<span class="input-group-addon">Name:</span>
+  		<input type="text" class="form-control" name="Name">
+  		<span class="input-group-btn">
+  			<button type="button" id="create_schedule" class="btn btn-default"><%= link_to 'Create', schedules_path	%></button>
+  		</span>
+  	</div>
+</form>
+
+<!--<button type="button" id="back_btn" class="btn btn-primary">< link_to Back, schedules_path ></button>-->
 
 <%= link_to 'Back', schedules_path %>
+
+<%= javascript_include_tag "hide_new" %>
