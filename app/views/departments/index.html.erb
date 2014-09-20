@@ -24,6 +24,8 @@
 
 <br />
 
+<%if user_has? :admin %>
 <%= link_to 'New Department', new_department_path, class: "button radius" %>
+<% end %>
 </body>
 </html>
