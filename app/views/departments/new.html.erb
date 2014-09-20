@@ -1,5 +1,10 @@
+<% if user_has? :admin %>
 <% content_for :title do %>New department<% end %>
 
 <%= render 'form' %>
 
 <%= link_to 'Back', departments_path %>
+<% else %>
+<h1 style="text-align: center">PERMISSION DENIED</h1>
+<p style="text-align: center">You do not have permission to view this page</p>
+<% end %>
