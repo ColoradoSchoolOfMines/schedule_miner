@@ -26,5 +26,6 @@
 <% end %>
 
 <br />
-
+<% if user_has? :admin %>
 <%= link_to 'New Teacher', new_teacher_path, class: "button radius" %>
+<% end %>
