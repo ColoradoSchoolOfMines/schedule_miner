@@ -1,6 +1,16 @@
+<% if current_user %>
+<% if current_user.admin_flag == 0 %>
 <% content_for :title do %>New course<% end %>
 
 <%= render 'form' %>
 <table>
 	<td><%= link_to 'Back', courses_path %></td>
 	<td><%= link_to 'Edit', edit_schedule_path(schedule) %></td>
+<%else%>
+<h1 style="text-align: center">PERMISSION DENIED</h1>
+<p style="text-align: center">You do not have permission to view this page</p>
+<% end %>
+<% else %>
+<h1 style="text-align: center">PERMISSION DENIED</h1>
+<p style="text-align: center">You do not have permission to view this page</p>
+<% end %>
