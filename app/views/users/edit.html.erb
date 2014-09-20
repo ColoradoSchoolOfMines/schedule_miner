@@ -1,12 +1,17 @@
 <html>
+	<% if current_user.admin_flag == 0 %>
 	<%= form_for(@current_user) do |f| %>
 		<div class="field">
 			<%= f.label "admin" %>
 			<%= f.text_field :admin_flag %>
 		</div>
-		<div class="actions">
-			<%= f.submit %>
-		</div>
+			<div class="actions">
+				<%= f.submit %>
+			</div>
+	<% end %>
+	<% else %>
+		<h1 style="text-align: center">PERMISSION DENIED</h1>
+		<p style="text-align: center">You do not have permission to view this page</p>
 	<% end %>
 </html>
 
