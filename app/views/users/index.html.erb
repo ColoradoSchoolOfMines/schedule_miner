@@ -9,7 +9,9 @@
 	<th>Last Name</th>
 	<th>Email</th>
 	<th>Admin</th>
+	<% if current_user.admin_flag == 0 %>
 	<th>Edit</th>
+	<% end %>
 </tr>
 <tr>
 	<td><%= current_user.first_name.gsub(/\s.+/, '') %></td>
@@ -22,7 +24,11 @@
       No
 	<% end %>
 	</td>
-	<td><%= link_to "Edit" , user_edit_path %></td>
+	<% if current_user.admin_flag == 0 %>
+	<td>
+		<%= link_to "Edit" , user_edit_path %>		
+	</td>
+	<% end %>
 </tr>
 
 </table>
