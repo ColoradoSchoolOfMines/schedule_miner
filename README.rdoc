@@ -2,6 +2,6 @@
 == Schedule Miner
 
 An application for helping Mines students plan their course schedules.
-
+Schedule Miner allows Mines students to browse through courses, departments and teachers and add selected course sections to schedules. Schedules can be automatically generated to show all combinations of sections for a given set of courses, and automatically detects and warns users of prerequisite and time conflict errors in their schedules.
 # TODO
 
