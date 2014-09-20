@@ -2,6 +2,7 @@
 <p id="notice"><%= notice %></p>
 
 <%= render partial: 'shared/sections', locals: {sections: @teacher.sections} %>
-
+<% if user_has? :admin %>
 <%= link_to 'Edit', edit_teacher_path(@teacher) %> |
+<% end %>
 <%= link_to 'Back', teachers_path %>

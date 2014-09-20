@@ -1,6 +1,11 @@
+<% if user_has? :admin %>
 <% content_for :title do %>Editing teacher<% end %>
 
 <%= render 'form' %>
 
 <%= link_to 'Show', @teacher %> |
 <%= link_to 'Back', teachers_path %>
+<%else%>
+<h1 style="text-align: center">PERMISSION DENIED</h1>
+<p style="text-align: center">You do not have permission to view this page</p>
+<%end%>
