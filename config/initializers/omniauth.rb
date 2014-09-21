@@ -8,6 +8,6 @@ OmniAuth.config.logger = Rails.logger
 Rails.application.config.middleware.use Rack::Session::Cookie
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :google_oauth2, "577255551189.apps.googleusercontent.com", "9Y6EjYFulWutGnNjDXJ3CYkt"
+  provider :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
   provider :developer unless Rails.env.production?
 end
