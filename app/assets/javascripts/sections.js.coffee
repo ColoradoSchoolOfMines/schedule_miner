@@ -35,7 +35,7 @@ WEEKDAY_LABEL_MAP = {
 S =
   CALENDAR:
     BACKGROUND: '#FBFBFB'
-    HEIGHT_SCALE: 0.007
+    HEIGHT_SCALE: 1
     PAD_BOTTOM: 20
 
   SLOT:
@@ -260,7 +260,7 @@ render_calendar = (layout) ->
   weekday_span = (layout.max_weekday - layout.min_weekday + 1)
 
   # Then, we calculate the size of the calendar. The width of the calendar is determined by the
-  # layout, but the height is scaled to the width and the displayed time span.
+  # layout, but the height is scaled to the displayed time span.
   #
   # Before it can be fetched, though, we need to apply the padding for the time and weekday labels.
   $calendar.css
@@ -269,9 +269,9 @@ render_calendar = (layout) ->
     paddingBottom: S.CALENDAR.PAD_BOTTOM
   RENDER_WIDTH = $calendar[0].clientWidth
   C_WIDTH = RENDER_WIDTH - S.TIME_LABEL.W
-  RENDER_HEIGHT = C_WIDTH * time_span / weekday_span * S.CALENDAR.HEIGHT_SCALE
-  C_HEIGHT = RENDER_HEIGHT - S.WEEKDAY_LABEL.H - S.CALENDAR.PAD_BOTTOM
-  $calendar.height C_HEIGHT
+  C_HEIGHT = time_span * S.CALENDAR.HEIGHT_SCALE
+  RENDER_HEIGHT = C_HEIGHT + S.WEEKDAY_LABEL.H + S.CALENDAR.PAD_BOTTOM
+  $calendar.height RENDER_HEIGHT
 
   PX_PER_WDAY = C_WIDTH / weekday_span
   PX_PER_MIN = C_HEIGHT / time_span
