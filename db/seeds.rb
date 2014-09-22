@@ -1,10 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Mayor.create(:name => 'Emanuel', :city => cities.first)
+# NOTE: this file should be idempotent, to prevent running `rake setup` from destroying everything.
 if Teacher.count == 0 then
   yong = Teacher.create(name: 'Yong Bakos')
   keith = Teacher.create(name: 'Keith Hellman')
@@ -121,6 +115,7 @@ Building.find_or_create_by_code(code: 'MH', name: 'Meyer Hall')
 Building.find_or_create_by_code(code: 'MZ', name: 'Marquez Hall')
 Building.find_or_create_by_code(code: 'NR', name: 'No Room')
 Building.find_or_create_by_code(code: 'OFF', name: 'Off Campus')
+Building.find_or_create_by_code(code: 'ONLINE', name: 'Online')
 Building.find_or_create_by_code(code: 'RC', name: 'Recreation Center')
 Building.find_or_create_by_code(code: 'SC', name: 'Student Center')
 Building.find_or_create_by_code(code: 'SH', name: 'Stratton Hall')
