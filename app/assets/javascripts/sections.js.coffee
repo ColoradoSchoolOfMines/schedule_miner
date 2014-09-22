@@ -243,9 +243,6 @@ layout_calendar = (sections) ->
 # Takes precalculated layout data and renders it to the screen. Called on any screen resize.
 #
 # TODO:
-#   * Add weekday markers at the top.
-#   * Add time markers on the side.
-#   * Add lines to divide hours/weekdays in the background of the calendar (canvas?)
 #   * Make display a bit more compact.
 #   * Add colors.
 render_calendar = (layout) ->
