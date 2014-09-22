@@ -1,6 +1,5 @@
-// Place all the styles related to the sections controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+// NOTE: Anything that affects the vertical size of sections or slots in the calendar must be put in
+// the CoffeeScript, so it can use it to calculate the needed time/pixel scaling.
 
 #section-calendar {
   background: #FFFFFF;
@@ -16,8 +15,8 @@
   border: 1px solid #DDD;
   box-shadow: -5px 0 5px rgba(248, 248, 248, 1.0);
   height: 100%;
+  padding: 0 5px;
   overflow: hidden;
-  padding: 10px;
 }
 
 .section-calendar-contents ol {
@@ -30,6 +29,5 @@
   font-size: 80%;
   list-style-type: none;
   margin: 0;
-  margin-bottom: 10px;
-  padding: 0;
+  padding: 0 5px;
 }

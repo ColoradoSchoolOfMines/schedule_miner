@@ -38,7 +38,12 @@ S =
     HEIGHT_SCALE: 1
     PAD_BOTTOM: 20
 
+  SECTION:
+    LINE_HEIGHT: 20
+    MARGIN_BOTTOM: 10
+
   SLOT:
+    VERT_PADDING: 10
     # This sets the amount by which each overlapping slot is moved back onto the previous one.
     OVERLAP: 5
 
@@ -78,13 +83,22 @@ array_findpos = (a, key, keyfunc) ->
 
 window.afp = array_findpos
 
-# ## Time display
+# ## Display
 # Renders a time given in minutes as proper AM/PM
 render_time = (time) ->
   hour = Math.floor(time / 60)
   minute = time % 60
 
   '' + ((hour + 11) % 12 + 1) + ':' + (if minute < 10 then '0' + minute else minute) + ' ' + (if hour < 12 then 'AM' else 'PM')
+
+# Given a section, calculates a foreground/background color for it.
+# TODO: Make this not, ya know, random
+calculate_color = (section) ->
+  r = Math.floor(Math.random() * 128)
+  g = Math.floor(Math.random() * 128)
+  b = Math.floor(Math.random() * 128)
+
+  ['rgb(' + r + ',' + g + ',' + b + ')', 'white']
 
 # # Layout
 # Takes the bare section data and does the necessary layout to display it as a calendar.
@@ -146,13 +160,14 @@ layout_calendar = (sections) ->
 
         for other_slot in weekday_slots[weekday]
           # A slot is considered to be overlapping if it starts or ends during the current slot.
-          if (other_slot.start_min >= slot.start_min and other_slot.start_min <= slot.end_min) or (other_slot.end_min >= slot.start_min and other_slot.end_min <= slot.end_min)
+          console.log day_of_week, 'Checking other_slot', render_time(other_slot.start_min), ' - ', render_time(other_slot.end_min), 'against slot', render_time(slot.start_min), ' - ', render_time(slot.end_min), 'already', other_slot.overlapping_slots
+          if not (other_slot.end_min < slot.start_min or other_slot.start_min > slot.end_min)
+            console.log day_of_week, '    ... overlaps'
             overlapping_slots.push other_slot
 
         # We need to update the overlap information for this slot and all slots that it overlaps
         # with.
         for other_slot in overlapping_slots
-          console.log day_of_week, 'Slot', render_time(other_slot.start_min), ' - ', render_time(other_slot.end_min), 'overlaps with', render_time(slot.start_min), ' - ', render_time(slot.end_min), 'already', other_slot.overlapping_slots
           (other_slot.overlapping_slots ||= [other_slot]).push slot
           (slot.overlapping_slots ||= [slot]).push other_slot
 
@@ -162,8 +177,6 @@ layout_calendar = (sections) ->
 
       # Push this section into the slot (new or otherwise).
       slot.sections.push(section)
-
-  console.log('Slots', weekday_time_slots)
 
   # ## Second pass
   # Once all of the sections have been placed in slots, they can be chunked together into chunks of
@@ -186,13 +199,11 @@ layout_calendar = (sections) ->
         chunk =
           start_min: slot.start_min
           end_min: slot.end_min
-          slots: [slot]
-          max_width: slot.overlapping_slots?.length || 1
-      else
-        # If we can, extend the current chunk with the new slot.
-        chunk.end_min = Math.max(chunk.end_min, slot.end_min)
-        chunk.max_width = Math.max(chunk.max_width, slot.overlapping_slots?.length || 1)
-        chunk.slots.push slot
+          slots: []
+
+      # Extend the current chunk with the new slot.
+      chunk.end_min = Math.max(chunk.end_min, slot.end_min)
+      chunk.slots.push slot
 
     # Store away the last created chunk.
     if chunk? then weekday_chunks[weekday].push chunk
@@ -200,36 +211,33 @@ layout_calendar = (sections) ->
   # ## Third pass
   # This pass assigns each slot to a separate column within the chunk, so they can be displayed side
   # by side.
+  max_needed_scale = 0
 
   for weekday in [min_weekday..max_weekday]
     for chunk in weekday_chunks[weekday]
-      # All columns start empty.
-      column_slots = {}
-      column_slots[column] = null for column in [0..chunk.max_width-1]
+      max_width = 1
+
+      # Yes, we're creating another level of nesting. This is so that slots to the right will
+      # correctly overlap ones to the left.
+      chunk.columns = []
 
       # Columns are assigned by moving through the slots in (assumed) chronological order.
       for slot in chunk.slots
-        for column in [0..chunk.max_width-1]
-          # If this column has a slot that ends after this slot starts, we have to move over. While
-          # in all technicality this could cause the slot to never be assigned to a column, we are
-          # assuming that the checks above for overlapping slots should have given us enough columns
-          # for all the slots in this chunk.
-          if column_slots[column] and column_slots[column].end_min > slot.start_min then continue
+        taken_columns = {}
+        for other_slot in (slot.overlapping_slots || [])
+          if other_slot.disp_column? then taken_columns[other_slot.disp_column] = true
 
-          # Otherwise, we can take over this column.
-          column_slots[column] = slot
-          slot.disp_column = column
+        slot.disp_column = 0
+        slot.disp_column++ while taken_columns[slot.disp_column]
 
-          # Each slot can take up at least one column, but if it doesn't overlap with any slots to
-          # its right, there is no reason not to expand it.
-          slot.disp_width = 1
+        max_width = Math.max(max_width, slot.disp_column + 1)
 
-          for next_column in [column..chunk.max_width-1]
-            if (slot.overlapping_slots ||= []).indexOf(column_slots[next_column]) != -1 then break
-            slot.disp_width++
-            column_slots[next_column] = slot
+        (chunk.columns[slot.disp_column] ||= []).push(slot)
 
-          break
+        slot_height = S.SLOT.VERT_PADDING * 2 + (S.SECTION.LINE_HEIGHT + S.SECTION.MARGIN_BOTTOM) * slot.sections.length
+        max_needed_scale = Math.max(max_needed_scale, slot_height / (slot.end_min - slot.start_min))
+
+      chunk.max_width = max_width
 
   # Finally, return an object with all of the layout information.
   min_time: min_time
@@ -237,7 +245,7 @@ layout_calendar = (sections) ->
   min_weekday: min_weekday
   max_weekday: max_weekday
   weekday_chunks: weekday_chunks
-
+  max_needed_scale: max_needed_scale
 
 # # Rendering
 # Takes precalculated layout data and renders it to the screen. Called on any screen resize.
@@ -266,7 +274,7 @@ render_calendar = (layout) ->
     paddingBottom: S.CALENDAR.PAD_BOTTOM
   RENDER_WIDTH = $calendar[0].clientWidth
   C_WIDTH = RENDER_WIDTH - S.TIME_LABEL.W
-  C_HEIGHT = time_span * S.CALENDAR.HEIGHT_SCALE
+  C_HEIGHT = time_span * layout.max_needed_scale
   RENDER_HEIGHT = C_HEIGHT + S.WEEKDAY_LABEL.H + S.CALENDAR.PAD_BOTTOM
   $calendar.height RENDER_HEIGHT
 
@@ -328,19 +336,27 @@ render_calendar = (layout) ->
 
       used_columns = 0
 
-      for slot in chunk.slots
-        $slot = $('<div class="section-calendar-slot"/>').appendTo $calendar
-        $slot.css
-          marginLeft: PX_PER_WDAY * (weekday - layout.min_weekday) + S.WEEKDAY.MARGIN_LEFT + slot_width * slot.disp_column - S.SLOT.OVERLAP * slot.disp_column
-          marginTop: PX_PER_MIN * (slot.start_min - start_time)
-        $slot.width slot_width
-        $slot.height PX_PER_MIN * (slot.end_min - slot.start_min)
-        used_columns += slot.disp_width
+      for column, i in chunk.columns
+        for slot in column
+          $slot = $('<div class="section-calendar-slot"/>').appendTo $calendar
+          $slot.css
+            marginLeft: PX_PER_WDAY * (weekday - layout.min_weekday) + S.WEEKDAY.MARGIN_LEFT + slot_width * i - S.SLOT.OVERLAP * i
+            marginTop: PX_PER_MIN * (slot.start_min - start_time)
+          $slot.width slot_width
+          $slot.height PX_PER_MIN * (slot.end_min - slot.start_min)
+          used_columns += slot.disp_width
 
-        $contents = $('<div class="section-calendar-contents"><ol></ol></div>').appendTo $slot
+          $contents = $('<div class="section-calendar-contents"><ol></ol></div>').appendTo $slot
+          $contents.css
+            paddingBottom: S.SLOT.VERT_PADDING
+            paddingTop: S.SLOT.VERT_PADDING
 
-        for section in slot.sections
-          $contents.find('ol').append('<li><b>' + section.course.department_code + ' ' + section.course.course_number + '</b> ' + section.code + '</li>')
+          for section in slot.sections
+            $section = $ '<li><b>' + section.course.department_code + ' ' + section.course.course_number + '</b> ' + section.code + '</li>'
+            $section.css
+              lineHeight: S.SECTION.LINE_HEIGHT + 'px'
+              marginBottom: S.SECTION.MARGIN_BOTTOM
+            $contents.find('ol').append $section
 
 # # Event handlers
 # When the document is ready, run the layout and rendering passes.

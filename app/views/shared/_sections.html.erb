@@ -37,8 +37,8 @@
   </tr>
 
 <% sections.each do |section| %>
-  <tr>
-    <td><%= section.course.department_code %>&nbsp;<%= section.course.course_number %></td>
+  <tr data-section-id="<%= section.id %>">
+    <td class="section-course-number"><%= section.course.department_code %>&nbsp;<%= section.course.course_number %></td>
     <td><%= link_to section.course.name, section.course %></td>
     <td><%= section.code %></td>
     <td><% section.teachers.each do |teacher|%> 
