@@ -35,7 +35,7 @@ WEEKDAY_LABEL_MAP = {
 S =
   CALENDAR:
     BACKGROUND: '#FBFBFB'
-    HEIGHT_SCALE: 1
+    MIN_HEIGHT_SCALE: 0.5
     PAD_BOTTOM: 20
 
   SECTION:
@@ -49,9 +49,10 @@ S =
 
   TIME_DIVISION:
     COLOR: '#DDDDDD'
+    HEAVY_COLOR: '#D6D6D6'
 
-  TIME_DIVISION_HEAVY:
-    COLOR: '#D6D6D6'
+  TIME_DIVISION_NOON:
+    HEAVY_COLOR: '#BBBBBB'
 
   TIME_LABEL:
     FONT: '12px "Exo 2"'
@@ -274,7 +275,7 @@ render_calendar = (layout) ->
     paddingBottom: S.CALENDAR.PAD_BOTTOM
   RENDER_WIDTH = $calendar[0].clientWidth
   C_WIDTH = RENDER_WIDTH - S.TIME_LABEL.W
-  C_HEIGHT = time_span * layout.max_needed_scale
+  C_HEIGHT = time_span * Math.max(layout.max_needed_scale, S.CALENDAR.MIN_HEIGHT_SCALE)
   RENDER_HEIGHT = C_HEIGHT + S.WEEKDAY_LABEL.H + S.CALENDAR.PAD_BOTTOM
   $calendar.height RENDER_HEIGHT
 
@@ -309,7 +310,7 @@ render_calendar = (layout) ->
     ctx.stroke()
 
     for weekday in [layout.min_weekday..layout.max_weekday]
-      ctx.strokeStyle = S.TIME_DIVISION_HEAVY.COLOR
+      ctx.strokeStyle = (if time == 720 then S.TIME_DIVISION_NOON.HEAVY_COLOR else S.TIME_DIVISION.HEAVY_COLOR)
       ctx.beginPath()
       ctx.lineWidth = 2
       ctx.moveTo S.TIME_LABEL.W + PX_PER_WDAY * (weekday - layout.min_weekday) + S.WEEKDAY.MARGIN_LEFT, y
