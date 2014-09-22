@@ -10,7 +10,7 @@
       <!-- <div class="flexcontainer"> -->
       <h2 class="col-md-1"><%= letter.upcase %></h2>
       <div class="row col-md-11">
-        <% teachers_chunked[letter].each do |teacher| %>
+        <% teachers_chunked[letter].sort_by {|teacher| teacher.name.split[-1]}.each do |teacher| %>
           <div class="teacher-button">
           <%= link_to teacher_path(teacher), class: "btn btn-default" do %>
             <%= teacher.name %>
