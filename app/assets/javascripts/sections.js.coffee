@@ -234,7 +234,7 @@ layout_calendar = (sections) ->
 
         (chunk.columns[slot.disp_column] ||= []).push(slot)
 
-        slot_height = S.SLOT.VERT_PADDING * 2 + (S.SECTION.LINE_HEIGHT + S.SECTION.MARGIN_BOTTOM) * slot.sections.length
+        slot_height = S.SLOT.VERT_PADDING * 2 + (S.SECTION.LINE_HEIGHT + S.SECTION.MARGIN_BOTTOM) * slot.sections.length - S.SECTION.MARGIN_BOTTOM
         max_needed_scale = Math.max(max_needed_scale, slot_height / (slot.end_min - slot.start_min))
 
       chunk.max_width = max_width
@@ -336,11 +336,11 @@ render_calendar = (layout) ->
 
       used_columns = 0
 
-      for column, i in chunk.columns
+      for column, column_idx in chunk.columns
         for slot in column
           $slot = $('<div class="section-calendar-slot"/>').appendTo $calendar
           $slot.css
-            marginLeft: PX_PER_WDAY * (weekday - layout.min_weekday) + S.WEEKDAY.MARGIN_LEFT + slot_width * i - S.SLOT.OVERLAP * i
+            marginLeft: PX_PER_WDAY * (weekday - layout.min_weekday) + S.WEEKDAY.MARGIN_LEFT + slot_width * column_idx - S.SLOT.OVERLAP * column_idx
             marginTop: PX_PER_MIN * (slot.start_min - start_time)
           $slot.width slot_width
           $slot.height PX_PER_MIN * (slot.end_min - slot.start_min)
@@ -351,11 +351,11 @@ render_calendar = (layout) ->
             paddingBottom: S.SLOT.VERT_PADDING
             paddingTop: S.SLOT.VERT_PADDING
 
-          for section in slot.sections
+          for section, i in slot.sections
             $section = $ '<li><b>' + section.course.department_code + ' ' + section.course.course_number + '</b> ' + section.code + '</li>'
             $section.css
               lineHeight: S.SECTION.LINE_HEIGHT + 'px'
-              marginBottom: S.SECTION.MARGIN_BOTTOM
+              marginBottom: (if i == slot.sections.length - 1 then 0 else S.SECTION.MARGIN_BOTTOM)
             $contents.find('ol').append $section
 
 # # Event handlers
