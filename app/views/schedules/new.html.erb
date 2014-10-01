@@ -7,13 +7,11 @@
   		<span class="input-group-addon">Name:</span>
   		<input type="text" class="form-control" name="Name">
   		<span class="input-group-btn">
-  			<button type="button" id="create_schedule" class="btn btn-default"><%= link_to 'Create', schedules_path	%></button>
+  			<button type="submit" id="create_schedule" class="btn btn-default">Create</button>
   		</span>
   	</div>
 </form>
 
-<!--<button type="button" id="back_btn" class="btn btn-primary">< link_to Back, schedules_path ></button>-->
-
-<%= link_to 'Back', schedules_path %>
+<button type="button" id="back_btn" class="btn btn-primary" onClick="location.href='/schedules'">Back</button>
 
 <%= javascript_include_tag "hide_new" %>
