@@ -15,4 +15,6 @@
 //= require nprogress
 //= require bootstrap 
 //= require_tree .
-//
+//= require typheadPlugin/bloodhound.min
+//= require typheadPlugin/typeahead.bundle.min
+//= require typheadPlugin/typeahead.jquery.min
