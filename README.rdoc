@@ -1,7 +1,24 @@
 {<img alt='Stories in Ready' src='https://badge.waffle.io/coloradoschoolofmines/schedule_miner.png?label=ready&title=Ready' />}[https://waffle.io/coloradoschoolofmines/schedule_miner]
-== Schedule Miner
+= Schedule Miner
 
 An application for helping Mines students plan their course schedules.
 Schedule Miner allows Mines students to browse through courses, departments and teachers and add selected course sections to schedules. Schedules can be automatically generated to show all combinations of sections for a given set of courses, and automatically detects and warns users of prerequisite and time conflict errors in their schedules.
-# TODO
+
+== Installing Dependencies
+
+=== Windows
+
+1. Go to http://railsinstaller.org/ and download and install Rails for Windows.
+2. Open up Git Bash, and clone the {repository}[https://github.com/ColoradoSchoolOfMines/schedule_miner/}.
+3. Open up Command Prompt wth Rails, and change to the directory where you cloned Schedule Miner.
+
+=== Linux
+
+1. Install Ruby and Ruby on Rails (this is specific to your distribution).
+2. In a terminal, clone Schedule Miner and `cd` into the resulting directory.
+
+== Setup
+
+  $ bundle install
+  $ rake setup
 
